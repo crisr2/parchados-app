@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "152690861869",
+    "project_id": "parchados-921e6",
+    "storage_bucket": "parchados-921e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152690861869:android:a3964b90f96d5bfe2655a4",
+        "android_client_info": {
+          "package_name": "com.appsmoviles.parchados"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO7cuQ6S-w4J-njKcRZwd4gu0XI0fyr0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
