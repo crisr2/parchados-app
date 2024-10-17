@@ -23,7 +23,7 @@
         </activity>
 
         <!-- Agrega la siguiente línea -->
-        <activity android:name=".UserProfileActivity"></activity>
+        <activity android:name=".UserProfileActivity"> </activity>
 
     </application>
 
