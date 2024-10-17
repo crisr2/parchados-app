@@ -1,0 +1,159 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    android:padding="16dp">
+
+    <!-- Botón de editar -->
+    <ImageButton
+        android:id="@+id/btn_edit_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:src="@drawable/ic_edit"
+        android:contentDescription="@string/editar_perfil" />
+
+    <!-- Título del perfil -->
+    <TextView
+        android:id="@+id/tv_profile_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/perfil"
+        android:textColor="#00B0FF"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Imagen del perfil -->
+    <ImageView
+        android:id="@+id/img_profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/tv_profile_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:clipToOutline="true"
+        android:src="@drawable/ic_default_profile"
+        android:background="@drawable/circle_shape"
+        android:contentDescription="@string/imagen_del_perfil" />
+
+    <!-- Contenedor de información del perfil -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/img_profile"
+        android:layout_marginTop="32dp">
+
+        <!-- Nombre -->
+        <TextView
+            android:id="@+id/tv_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nombre"
+            android:textColor="#00B0FF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_name_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pepito_perez"
+            android:textColor="#FFFFFF" />
+
+        <!-- Usuario -->
+        <TextView
+            android:id="@+id/tv_username_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/usuario"
+            android:textColor="#00B0FF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_username_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/elpepitop"
+            android:textColor="#FFFFFF" />
+
+        <!-- Correo -->
+        <TextView
+            android:id="@+id/tv_email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/correo"
+            android:textColor="#00B0FF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_email_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pepito_gmail_com"
+            android:textColor="#FFFFFF" />
+
+        <!-- Teléfono -->
+        <TextView
+            android:id="@+id/tv_phone_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tel_fono"
+            android:textColor="#00B0FF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_phone_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tel_345_7891239"
+            android:textColor="#FFFFFF" />
+
+        <!-- Edad -->
+        <TextView
+            android:id="@+id/tv_age_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edad"
+            android:textColor="#00B0FF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_age_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edad_21"
+            android:textColor="#FFFFFF" />
+
+        <!-- Género -->
+        <TextView
+            android:id="@+id/tv_gender_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/g_nero"
+            android:textColor="#00B0FF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_gender_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gender_h"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Botón de cerrar -->
+    <ImageButton
+        android:id="@+id/btn_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="@null"
+        android:src="@drawable/ic_close"
+        android:contentDescription="@string/cerrar" />
+
+</RelativeLayout>
