@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Parchados</string>
+    <string name="t_tulo">Título</string>
+    <string name="descripci_n">Descripción</string>
+    <string name="categor_a">Categoría</string>
+    <string name="direcci_n">Dirección</string>
+    <string name="entrada">Entrada</string>
+    <string name="tel_fono_opcional">Teléfono (opcional)</string>
+    <string name="horario">Horario</string>
+    <string name="guardar">Guardar</string>
 </resources>
