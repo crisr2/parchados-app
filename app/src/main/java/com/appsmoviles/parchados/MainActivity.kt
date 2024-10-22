@@ -12,8 +12,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-import android.content.Intent
-import android.widget.Button
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,15 +27,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        //agregados para el perfil
-        // Configura el botón
-        val buttonViewProfile = findViewById<Button>(R.id.button_view_profile)
-        buttonViewProfile.setOnClickListener {
-            val intent = Intent(this, UserProfileActivity::class.java)
-            startActivity(intent)
-        }
-        //agregados para el perfil
 
         // agregados para el menú principal
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
@@ -69,7 +58,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
             }
             R.id.nav_item_three -> {
-                // Acción para el tercer elemento
+                val intent =Intent(this, UserProfileActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_item_four -> {
                 // Acción para el segundo elemento

@@ -65,10 +65,10 @@ class FormsActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (s != null) {
-                    if (s.length > 250) {
-                        descriptionLayout.error = "Excede caracteres"
+                    if (s.length > 10) {
+                        phoneLayout.error = "Excede caracteres"
                     } else {
-                        descriptionLayout.error = null
+                        phoneLayout.error = null
                     }
                 }
             }

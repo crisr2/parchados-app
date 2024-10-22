@@ -18,7 +18,7 @@
     <string name="categor_a">*Categoría</string>
     <string name="direcci_n">*Dirección</string>
     <string name="precio">*Precio</string>
-    <string name="tel_fono">Teléfono</string>
+    <string name="tel_fono">*Teléfono</string>
     <string name="horario">*Horario</string>
     <string name="minutos">*Minutos</string>
     <string name="horas">*Horas</string>
