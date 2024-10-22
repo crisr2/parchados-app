@@ -8,4 +8,14 @@
     <string name="tel_fono_opcional">Teléfono (opcional)</string>
     <string name="horario">Horario</string>
     <string name="guardar">Guardar</string>
+
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="parchados">Parchados</string>
+    <string name="logo">logo</string>
+    <string name="perfil">Perfil</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="formulario_inscripci_n">Formulario Inscripción</string>
+    <string name="cuenta">Cuenta</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
 </resources>

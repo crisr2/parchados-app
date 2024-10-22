@@ -3,6 +3,12 @@
     <style name="Base.Theme.Parchados" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!-- Agregado para menú principal -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!-- Agregado para menú principal -->
+
     </style>
 
     <style name="Theme.Parchados" parent="Base.Theme.Parchados" />

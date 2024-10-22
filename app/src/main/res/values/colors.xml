@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="degrade_1">#101C20</color>
+    <color name="degrade_2">#1E90FF</color>
+    <color name="degrade_3">#00C2FF</color>
 </resources>

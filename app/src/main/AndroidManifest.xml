@@ -21,6 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Agregado para menú principal -->
+        <activity android:name=".FormsActivity"></activity>
+        <!-- Agregado para menú principal -->
+
     </application>
 
 </manifest>
