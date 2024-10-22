@@ -22,9 +22,11 @@
             </intent-filter>
         </activity>
 
-        <!-- Agregado para menú principal -->
+
+        <!-- Agregado para formulario de evento -->
         <activity android:name=".FormsActivity"></activity>
-        <!-- Agregado para menú principal -->
+        <!-- Agregado para formulario de evento -->
+
 
     </application>
 

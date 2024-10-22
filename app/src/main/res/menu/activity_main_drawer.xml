@@ -7,7 +7,7 @@
             android:title="@string/favoritos"/>
         <item android:id="@+id/nav_item_two"
             android:icon="@drawable/abc_vector_test"
-        android:title="@string/formulario_inscripci_n"/>
+        android:title="@string/registra_tu_evento"/>
     </group>
 
     <item android:title="@string/cuenta">

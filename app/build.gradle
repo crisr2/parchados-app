@@ -46,6 +46,8 @@ dependencies {
     implementation libs.androidx.coordinatorlayout
     implementation libs.car.ui.lib
 
+    // Se agregan algunas librerias para el forms de registro de eventos
+    implementation libs.material.v190
 
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
