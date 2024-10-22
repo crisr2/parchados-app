@@ -24,7 +24,7 @@
 
 
         <!-- Agregado para formulario de evento -->
-        <activity android:name=".FormsActivity"></activity>
+        <activity android:name=".FormsActivity"> </activity>
         <!-- Agregado para formulario de evento -->
 
 

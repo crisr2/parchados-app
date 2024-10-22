@@ -1,18 +1,15 @@
 package com.appsmoviles.parchados
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -38,12 +35,12 @@ class FormsActivity : AppCompatActivity() {
         val hoursLayout = findViewById<TextInputLayout>(R.id.event_hours)
         val minutesLayout = findViewById<TextInputLayout>(R.id.event_minutes)
 
-        val titleText: TextInputEditText = titleLayout.editText as TextInputEditText
+        //val titleText: TextInputEditText = titleLayout.editText as TextInputEditText
         val descriptionText: TextInputEditText = descriptionLayout.editText as TextInputEditText
-        val locationText: TextInputEditText = locationLayout.editText as TextInputEditText
+        //val locationText: TextInputEditText = locationLayout.editText as TextInputEditText
         val phoneText: TextInputEditText = phoneLayout.editText as TextInputEditText
-        val categoryText: AutoCompleteTextView = categoryLayout.editText as AutoCompleteTextView
-        val priceText: TextInputEditText = priceLayout.editText as TextInputEditText
+        //val categoryText: AutoCompleteTextView = categoryLayout.editText as AutoCompleteTextView
+        //val priceText: TextInputEditText = priceLayout.editText as TextInputEditText
         val hoursText: TextInputEditText = hoursLayout.editText as TextInputEditText
         val minutesText: TextInputEditText = minutesLayout.editText as TextInputEditText
 
@@ -82,6 +79,7 @@ class FormsActivity : AppCompatActivity() {
         hoursText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
+            @SuppressLint("SetTextI18n")
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.isNullOrEmpty()) {
                     val hours = s.toString().toIntOrNull() ?: 0
@@ -98,6 +96,7 @@ class FormsActivity : AppCompatActivity() {
         minutesText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
+            @SuppressLint("SetTextI18n")
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.isNullOrEmpty()) {
                     val minutes = s.toString().toIntOrNull() ?: 0
