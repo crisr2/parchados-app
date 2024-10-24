@@ -20,4 +20,13 @@
     <string name="g_nero">Género:</string>
     <string name="gender_h">H</string>
     <string name="cerrar">Cerrar</string>
+    <string name="button_Text">Iniciar Sesion</string>
+    <string name="user">Usuario</string>
+    <string name="no_login">¿No tienes cuenta? Registrate</string>
+    <string name="if_reg">¿Ya tienes cuenta? Inicia sesion</string>
+    <string name="first_text">Inicio de</string>
+    <string name="second_text">Sesion</string>
+    <string name="description">Imagen</string>
+    <string name="hint_pass">Contraseña</string>
+    <string name="hint_email">Correo</string>
 </resources>
