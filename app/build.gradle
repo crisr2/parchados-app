@@ -46,8 +46,8 @@ dependencies {
     androidTestImplementation libs.androidx.espresso.core
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.analytics
-    implementation 'com.google.firebase:firebase-auth'
-    implementation "com.airbnb.android:lottie:6.5.2"
+    implementation libs.firebase.auth
+    implementation libs.lottie
 }
 
 apply plugin: 'com.google.gms.google-services'
