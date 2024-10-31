@@ -29,24 +29,5 @@
         <item>Entretenimiento</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="editar_perfil">Editar Perfil</string>
-    <string name="user_name">Nombre del Usuario</string>
-    <string name="user_profile_image">User profile image</string>
-    <string name="imagen_del_perfil">Imagen del perfil</string>
-    <string name="nombre">Nombre:</string>
-    <string name="pepito_perez">Pepito Perez</string>
-    <string name="usuario">Usuario:</string>
-    <string name="elpepitop">elpepitop</string>
-    <string name="correo">Correo:</string>
-    <string name="pepito_gmail_com">pepito@gmail.com</string>
-    <string name="tel_345_7891239">345 7891239</string>
-    <string name="edad">Edad:</string>
-    <string name="edad_21">21</string>
-    <string name="g_nero">Género:</string>
-    <string name="gender_h">H</string>
-    <string name="cerrar">Cerrar</string>
     <string name="MAPS_KEY">AIzaSyANfNEPGlmNfy8b7Mef8vvsTAXQh2KrlUs</string>
-    <string name="ver_perfil">Ver Perfil</string>
 </resources>

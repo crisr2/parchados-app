@@ -1,5 +1,0 @@
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@android:color/transparent"/>
-    <corners android:radius="60dp"/> <!-- Cambia el valor para ajustar el radio de la circunferencia -->
-    <stroke android:width="2dp" android:color="@android:color/darker_gray"/>
-</shape>

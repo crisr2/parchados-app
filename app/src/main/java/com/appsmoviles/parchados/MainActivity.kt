@@ -209,8 +209,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                 startActivity(intent)
             }
             R.id.nav_item_three -> {
-                val intent = Intent(this, UserProfileActivity::class.java)
-                startActivity(intent)
+                // Acción para el primer elemento
             }
             R.id.nav_item_four -> {
                 // Acción para el segundo elemento

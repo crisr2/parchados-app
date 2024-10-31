@@ -22,9 +22,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Agregado para perfil -->
-        <activity android:name=".UserProfileActivity"> </activity>
-
         <!-- Agregado para formulario de evento -->
         <activity android:name=".FormsActivity"> </activity>
 
