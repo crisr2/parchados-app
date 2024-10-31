@@ -51,11 +51,16 @@ dependencies {
     // Se agregan algunas librerias para el forms de registro de eventos
     implementation libs.material.v190
 
+    implementation libs.firebase.auth.ktx
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.analytics
+    implementation libs.firebase.auth
+    implementation libs.lottie
     implementation libs.google.maps
     implementation libs.places
 }
+
+apply plugin: 'com.google.gms.google-services'

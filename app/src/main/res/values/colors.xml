@@ -10,4 +10,6 @@
     <color name="degrade_1">#101C20</color>
     <color name="degrade_2">#1E90FF</color>
     <color name="degrade_3">#00C2FF</color>
+    <color name="text">#00C2FF</color>
+    <color name="subs">#B0BEC5</color>
 </resources>
