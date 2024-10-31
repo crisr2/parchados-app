@@ -3,7 +3,6 @@ package com.appsmoviles.parchados
 import android.Manifest
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.PopupMenu
@@ -205,8 +204,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                 // Acción para el primer elemento
             }
             R.id.nav_item_two -> {
-                val intent = Intent(this, FormsActivity::class.java)
-                startActivity(intent)
+                // Acción para el primer elemento
             }
             R.id.nav_item_three -> {
                 // Acción para el primer elemento

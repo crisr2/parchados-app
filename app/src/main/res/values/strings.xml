@@ -10,24 +10,8 @@
     <string name="favoritos">Favoritos</string>
     <string name="cuenta">Cuenta</string>
     <string name="cerrar_sesi_n">Cerrar sesión</string>
-    <string name="enviar">Enviar</string>
-    <string name="obligatorio">*Campo Obligatorio</string>
     <string name="registra_tu_evento">Registra tu evento</string>
-    <string name="t_tulo">*Título</string>
-    <string name="descripci_n">*Descripción</string>
-    <string name="categor_a">*Categoría</string>
-    <string name="direcci_n">*Dirección</string>
-    <string name="precio">*Precio</string>
-    <string name="tel_fono">*Teléfono</string>
-    <string name="horario">*Horario</string>
-    <string name="minutos">*Minutos</string>
-    <string name="horas">*Horas</string>
 
-    <string-array name="categorias">
-        <item>Deportes</item>
-        <item>Comida</item>
-        <item>Entretenimiento</item>
-    </string-array>
 
     <string name="MAPS_KEY">AIzaSyANfNEPGlmNfy8b7Mef8vvsTAXQh2KrlUs</string>
 </resources>
