@@ -1,6 +1,9 @@
 package com.appsmoviles.parchados
 
+import android.Manifest
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.PopupMenu
@@ -8,12 +11,14 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -23,13 +28,15 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.RectangularBounds
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.android.material.navigation.NavigationView
 import org.json.JSONArray
 import java.io.InputStream
-import android.Manifest
 
-class MainActivity : AppCompatActivity(), OnMapReadyCallback {
+class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
     private var mGoogleMap: GoogleMap? = null
@@ -42,21 +49,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        drawer = findViewById(R.id.drawer_layout)
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_main)
-        setSupportActionBar(toolbar)
-
-        toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer.addDrawerListener(toggle)
-        toggle.syncState()
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
+        // Inicialización de Places
         Places.initialize(applicationContext, getString(R.string.google_map_api_key))
+
+        // Configuración del AutocompleteSupportFragment
         autocompleteFragment = supportFragmentManager.findFragmentById(R.id.autcomplete_fragment) as AutocompleteSupportFragment
         autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.ADDRESS, Place.Field.LAT_LNG))
 
@@ -66,12 +62,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         )
         autocompleteFragment.setLocationBias(limitesBusqueda)
 
+        // Listener para selección de lugar
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 val latLng = place.latLng
                 latLng?.let { ZoomOnMap(it) }
                 if (latLng != null) {
-                    addMarkerOnMap(latLng, place.name ?: place.name)
+                    addMarkerOnMap(latLng, place.name ?: "Ubicación")
                 }
             }
 
@@ -80,6 +77,25 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
+        // Configuración del DrawerLayout
+        drawer = findViewById(R.id.drawer_layout)
+        val toolbar: Toolbar = findViewById(R.id.toolbar_main)
+        setSupportActionBar(toolbar)
+        toggle = ActionBarDrawerToggle(
+            this,
+            drawer,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawer.addDrawerListener(toggle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
+
+        // Configuración de la vista del mapa
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
 
@@ -94,6 +110,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         mapOptionButton.setOnClickListener {
             popupMenu.show()
         }
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawer_layout)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
     }
 
     private fun ZoomOnMap(latitudes: LatLng) {
@@ -102,7 +124,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun addMarkerOnMap(position: LatLng, title: String) {
         currentMarker?.remove()
-
         currentMarker = mGoogleMap?.addMarker(
             MarkerOptions()
                 .position(position)
@@ -112,7 +133,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun changeMap(itemId: Int) {
-        when (itemId) {
+        when(itemId) {
             R.id.normal_map -> mGoogleMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
             R.id.hybrid_map -> mGoogleMap?.mapType = GoogleMap.MAP_TYPE_HYBRID
             R.id.satellite_map -> mGoogleMap?.mapType = GoogleMap.MAP_TYPE_SATELLITE
@@ -128,29 +149,91 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         googleMap.uiSettings?.isMyLocationButtonEnabled = true
         googleMap.uiSettings?.isZoomControlsEnabled = true
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
-            return
+        addMarkers()
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mGoogleMap?.isMyLocationEnabled = true
+        } else {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
         }
-        googleMap.isMyLocationEnabled = true
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     mGoogleMap?.isMyLocationEnabled = true
                 }
+            } else {
+                Toast.makeText(this, "Permiso de ubicación denegado", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    override fun onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
+    private fun addMarkers() {
+        try {
+            val inputStream: InputStream = resources.openRawResource(R.raw.places)
+            val json = inputStream.bufferedReader().use { it.readText() }
+            val jsonArray = JSONArray(json)
+
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                val title = jsonObject.getString("title")
+                val snippet = jsonObject.getString("snippet")
+                val latitude = jsonObject.getDouble("latitude")
+                val longitude = jsonObject.getDouble("longitude")
+
+                val position = LatLng(latitude, longitude)
+                mGoogleMap?.addMarker(
+                    MarkerOptions()
+                        .position(position)
+                        .title(title)
+                        .snippet(snippet)
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "Error al cargar marcadores desde JSON", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    // Manejo de navegación
+    override fun onNavigationItemSelected(item: android.view.MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_item_one -> {
+                // Acción para el primer elemento
+            }
+            R.id.nav_item_two -> {
+                val intent = Intent(this, FormsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_item_three -> {
+                val intent = Intent(this, UserProfileActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_item_four -> {
+                // Acción para el segundo elemento
+            }
+        }
+        drawer.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        toggle.syncState()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        toggle.onConfigurationChanged(newConfig)
+    }
+
+    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
