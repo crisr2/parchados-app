@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <!-- NavigationView con el layout de encabezado estático -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -21,6 +22,59 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
-    <!-- Agregado para menú principal -->
+
+    <!-- Layout principal que contiene el mapa y otros elementos -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/map_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"> <!-- Margin para evitar superposición con el Toolbar -->
+
+        <!-- Fragmento del mapa -->
+        <androidx.fragment.app.FragmentContainerView
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/map_fragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.5" />
+
+        <!-- Botón de opciones del mapa -->
+        <ImageButton
+            android:id="@+id/mapOptionsMenu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/menu_bar"
+            android:background="@null"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Barra de búsqueda/autocompletado -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/mapOptionsMenu"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/autcomplete_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
