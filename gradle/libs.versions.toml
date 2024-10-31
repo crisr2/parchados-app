@@ -17,6 +17,7 @@ googleMaps = "17.0.0"
 constraintlayout = "2.1.4"
 carUiLib = "2.6.0"
 materialVersion = "1.12.0"
+places = "4.0.0"
 
 [libraries]
 androidx-coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorlayout" }
@@ -34,6 +35,7 @@ google-maps = { group = "com.google.android.gms", name = "play-services-maps", v
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 car-ui-lib = { group = "com.android.car.ui", name = "car-ui-lib", version.ref = "carUiLib" }
 material-v190 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+places = { module = "com.google.android.libraries.places:places", version.ref = "places" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

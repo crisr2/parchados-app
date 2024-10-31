@@ -53,7 +53,7 @@
             android:id="@+id/tv_name_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nombre"
+            android:text="nombre"
             android:textColor="#00B0FF"
             android:textStyle="bold" />
 
@@ -61,7 +61,7 @@
             android:id="@+id/tv_name_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pepito_perez"
+            android:text="pepito_perez"
             android:textColor="#FFFFFF" />
 
         <!-- Usuario -->
@@ -69,7 +69,7 @@
             android:id="@+id/tv_username_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/usuario"
+            android:text="usuario"
             android:textColor="#00B0FF"
             android:textStyle="bold" />
 
@@ -77,7 +77,7 @@
             android:id="@+id/tv_username_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/elpepitop"
+            android:text="elpepitop"
             android:textColor="#FFFFFF" />
 
         <!-- Correo -->
@@ -85,7 +85,7 @@
             android:id="@+id/tv_email_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/correo"
+            android:text="correo"
             android:textColor="#00B0FF"
             android:textStyle="bold" />
 
@@ -93,7 +93,7 @@
             android:id="@+id/tv_email_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pepito_gmail_com"
+            android:text="pepito_gmail_com"
             android:textColor="#FFFFFF" />
 
         <!-- Teléfono -->
@@ -109,7 +109,7 @@
             android:id="@+id/tv_phone_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tel_345_7891239"
+            android:text="tel_345_7891239"
             android:textColor="#FFFFFF" />
 
         <!-- Edad -->
@@ -117,7 +117,7 @@
             android:id="@+id/tv_age_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/edad"
+            android:text="edad"
             android:textColor="#00B0FF"
             android:textStyle="bold" />
 
@@ -125,7 +125,7 @@
             android:id="@+id/tv_age_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/edad_21"
+            android:text="edad_21"
             android:textColor="#FFFFFF" />
 
         <!-- Género -->
@@ -133,7 +133,7 @@
             android:id="@+id/tv_gender_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/g_nero"
+            android:text="g_nero"
             android:textColor="#00B0FF"
             android:textStyle="bold" />
 
@@ -141,7 +141,7 @@
             android:id="@+id/tv_gender_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gender_h"
+            android:text="gender_h"
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
