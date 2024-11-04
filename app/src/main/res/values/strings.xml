@@ -30,4 +30,14 @@
     </string-array>
 
     <string name="MAPS_KEY">AIzaSyANfNEPGlmNfy8b7Mef8vvsTAXQh2KrlUs</string>
+
+    <string name="entrada">Entrada</string>
+    <string name="salida">Salida</string>
+    <string name="a_adir_imagen_portada">Añadir imagen portada</string>
+    <string name="imagen_seleccionada">Imagen seleccionada</string>
+    <string name="seleccionar_imagen">Seleccionar imagen</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+    <string name="tiktok">TikTok</string>
+    <string name="otro_link">Otro Link</string>
 </resources>
