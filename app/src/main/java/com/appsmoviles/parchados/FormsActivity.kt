@@ -14,7 +14,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import android.app.TimePickerDialog
 import android.content.Intent
-import android.util.Log
+import android.widget.AutoCompleteTextView
+import android.widget.EditText
 import android.widget.ImageView
 import java.util.*
 import androidx.activity.result.ActivityResultLauncher
@@ -24,6 +25,9 @@ import java.text.SimpleDateFormat
 class FormsActivity : AppCompatActivity() {
     private lateinit var descriptionLayout: TextInputLayout
     private lateinit var phoneLayout: TextInputLayout
+    private lateinit var igLayout: TextInputLayout
+    private lateinit var tkLayout: TextInputLayout
+    private lateinit var linkLayout: TextInputLayout
 
     private lateinit var entryTimeText: TextInputEditText
     private lateinit var exitTimeText: TextInputEditText
@@ -43,21 +47,32 @@ class FormsActivity : AppCompatActivity() {
 
         descriptionLayout = findViewById(R.id.event_description)
         phoneLayout = findViewById(R.id.event_phone)
+        igLayout = findViewById(R.id.event_ig)
+        tkLayout = findViewById(R.id.event_tk)
+        linkLayout = findViewById(R.id.event_link)
 
         val titleLayout = findViewById<TextInputLayout>(R.id.event_title)
         val locationLayout = findViewById<TextInputLayout>(R.id.event_location)
+        val localityLayout = findViewById<TextInputLayout>(R.id.event_locality)
         val categoryLayout = findViewById<TextInputLayout>(R.id.event_category)
         val priceLayout = findViewById<TextInputLayout>(R.id.event_price)
         val entryHoursLayout = findViewById<TextInputLayout>(R.id.event_hours_entry)
         val exitHoursLayout = findViewById<TextInputLayout>(R.id.event_hours_exit)
 
-        //val titleText: TextInputEditText = titleLayout.editText as TextInputEditText
+        val titleText: TextInputEditText = titleLayout.editText as TextInputEditText
         val descriptionText: TextInputEditText = descriptionLayout.editText as TextInputEditText
-        //val locationText: TextInputEditText = locationLayout.editText as TextInputEditText
+        val locationText: TextInputEditText = locationLayout.editText as TextInputEditText
+        val localityText: AutoCompleteTextView = localityLayout.editText as AutoCompleteTextView
         val phoneText: TextInputEditText = phoneLayout.editText as TextInputEditText
-        //val categoryText: AutoCompleteTextView = categoryLayout.editText as AutoCompleteTextView
-        //val priceText: TextInputEditText = priceLayout.editText as TextInputEditText
+        val categoryText: AutoCompleteTextView = categoryLayout.editText as AutoCompleteTextView
+        val priceText: TextInputEditText = priceLayout.editText as TextInputEditText
+        val entryHoursText: TextInputEditText = entryHoursLayout.editText as TextInputEditText
+        val exitHoursText: TextInputEditText = exitHoursLayout.editText as TextInputEditText
+        val igText: TextInputEditText = igLayout.editText as TextInputEditText
+        val tkText: TextInputEditText = tkLayout.editText as TextInputEditText
+        val linkText: TextInputEditText = linkLayout.editText as TextInputEditText
 
+        // Reloj
         entryTimeText = entryHoursLayout.editText as TextInputEditText
         exitTimeText = exitHoursLayout.editText as TextInputEditText
 
@@ -84,6 +99,36 @@ class FormsActivity : AppCompatActivity() {
             removeImageButton.visibility = View.GONE // Oculta el botón "X"
         }
 
+        // Eliminar errores cuando se vuelve a escribir
+        fun setupClearErrorOnType(textField: EditText, textLayout: TextInputLayout) {
+            textField.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    // Limpiar el error cuando el usuario comienza a escribir
+                    if (textField == igText || textField == tkText || textField == linkText) {
+                        textLayout.error = null
+                    }
+                    else if (!s.isNullOrEmpty()) {
+                        textLayout.error = null
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
+        }
+        setupClearErrorOnType(titleText, titleLayout)
+        setupClearErrorOnType(locationText, locationLayout)
+        setupClearErrorOnType(localityText, localityLayout)
+        setupClearErrorOnType(categoryText, categoryLayout)
+        setupClearErrorOnType(priceText, priceLayout)
+        setupClearErrorOnType(entryHoursText, entryHoursLayout)
+        setupClearErrorOnType(exitHoursText, exitHoursLayout)
+        setupClearErrorOnType(igText, igLayout)
+        setupClearErrorOnType(tkText, tkLayout)
+        setupClearErrorOnType(linkText, linkLayout)
+
+        // Descripción
         descriptionText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -100,6 +145,7 @@ class FormsActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
+        // Teléfono
         phoneText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -132,14 +178,14 @@ class FormsActivity : AppCompatActivity() {
             }
         }
 
+        // Validación de los campos
         findViewById<Button>(R.id.submitButton).setOnClickListener {
-            val isValid = validateFields(titleLayout, descriptionLayout, locationLayout, phoneLayout, categoryLayout, priceLayout, exitHoursLayout, entryHoursLayout)
+            val isValid = validateFields(titleLayout, descriptionLayout, locationLayout, localityLayout, phoneLayout, categoryLayout, priceLayout, exitHoursLayout, entryHoursLayout)
+            val allLinksValid = validateLinks()
 
-            if (isValid && validateLinks()) {
+            if (isValid && allLinksValid) {
                 Toast.makeText(this, "Formulario enviado correctamente", Toast.LENGTH_SHORT).show()
                 // Aquí puedes agregar la lógica para manejar el envío del formulario
-            } else {
-                Toast.makeText(this, "Por favor, corrige los errores antes de enviar.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -218,7 +264,7 @@ class FormsActivity : AppCompatActivity() {
         imagePickerLauncher.launch("image/*")
     }
 
-    fun validateLinks(): Boolean {
+    private fun validateLinks(): Boolean {
         val igLinkEditText: TextInputEditText = findViewById(R.id.ig_link)
         val tkLinkEditText: TextInputEditText = findViewById(R.id.tk_link)
         val fullLinkEditText: TextInputEditText = findViewById(R.id.link)
@@ -233,11 +279,8 @@ class FormsActivity : AppCompatActivity() {
         if (igUsername.isNotEmpty()) {
             val instagramLink = "https://instagram.com/${igUsername}"
             if (!isValidUrl(instagramLink)) {
-                Log.e("Validation", "El enlace de Instagram no es válido.")
+                igLayout.error = "Usuario no válido"
                 allLinksValid = false
-            } else {
-                Log.d("Links", "Instagram: $instagramLink")
-                openLinkInBrowser(instagramLink)
             }
         }
 
@@ -245,21 +288,15 @@ class FormsActivity : AppCompatActivity() {
         if (tkUsername.isNotEmpty()) {
             val tiktokLink = "https://tiktok.com/@${tkUsername}"
             if (!isValidUrl(tiktokLink)) {
-                Log.e("Validation", "El enlace de TikTok no es válido.")
+                tkLayout.error = "Usuario no válido"
                 allLinksValid = false
-            } else {
-                Log.d("Links", "TikTok: $tiktokLink")
-                openLinkInBrowser(tiktokLink)
             }
         }
 
         // Validación del enlace completo
         if (fullLink.isNotEmpty() && !isValidUrl(fullLink)) {
-            Log.e("Validation", "El enlace completo no es válido.")
+            linkLayout.error = "Link no válido"
             allLinksValid = false
-        } else if (fullLink.isNotEmpty()) {
-            Log.d("Validation", "El enlace completo es válido.")
-            openLinkInBrowser(fullLink)
         }
         return allLinksValid
     }

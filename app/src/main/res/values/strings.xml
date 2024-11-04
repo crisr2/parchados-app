@@ -29,15 +29,39 @@
         <item>Entretenimiento</item>
     </string-array>
 
+    <string-array name="localidades">
+        <item>Antonio Nariño</item>
+        <item>Barrios Unidos</item>
+        <item>Bosa</item>
+        <item>Candelaria</item>
+        <item>Chapinero</item>
+        <item>Ciudad Bolívar</item>
+        <item>Engativá</item>
+        <item>Fontibón</item>
+        <item>Kennedy</item>
+        <item>Los Mártires</item>
+        <item>Puente Aranda</item>
+        <item>Rafael Uribe Uribe</item>
+        <item>San Cristóbal</item>
+        <item>Santa Fe</item>
+        <item>Suba</item>
+        <item>Sumapaz</item>
+        <item>Teusaquillo</item>
+        <item>Tunjuelito</item>
+        <item>Usaquén</item>
+        <item>Usme</item>
+    </string-array>
+
     <string name="MAPS_KEY">AIzaSyANfNEPGlmNfy8b7Mef8vvsTAXQh2KrlUs</string>
 
     <string name="entrada">Entrada</string>
     <string name="salida">Salida</string>
-    <string name="a_adir_imagen_portada">Añadir imagen portada</string>
     <string name="imagen_seleccionada">Imagen seleccionada</string>
     <string name="seleccionar_imagen">Seleccionar imagen</string>
     <string name="instagram">Instagram</string>
-    <string name="facebook">Facebook</string>
     <string name="tiktok">TikTok</string>
     <string name="otro_link">Otro Link</string>
+    <string name="eliminar_imagen">Eliminar imagen</string>
+    <string name="localidad">*Localidad</string>
+    <string name="portada">Portada</string>
 </resources>
