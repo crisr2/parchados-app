@@ -116,6 +116,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             insets
         }
 
+        // Filtro de categorias
         val categoryFilterButton: ImageButton = findViewById(R.id.categoryFilterButton)
         val categoryMenu = PopupMenu(this, categoryFilterButton)
         categoryMenu.menuInflater.inflate(R.menu.category_menu, categoryMenu.menu)
@@ -124,19 +125,15 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             when (menuItem.itemId) {
                 R.id.category_all -> {
                     addMarkers(null)
-                    Toast.makeText(this, "Mostrando todas las categorías", Toast.LENGTH_SHORT).show()
                 }
                 R.id.category_sport -> {
                     addMarkers("Deporte")
-                    Toast.makeText(this, "Mostrando categoría: Deporte", Toast.LENGTH_SHORT).show()
                 }
                 R.id.category_entertainment -> {
                     addMarkers("Entretenimiento")
-                    Toast.makeText(this, "Mostrando categoría: Entretenimiento", Toast.LENGTH_SHORT).show()
                 }
                 R.id.category_food -> {
                     addMarkers("Comida")
-                    Toast.makeText(this, "Mostrando categoría: Comida", Toast.LENGTH_SHORT).show()
                 }
             }
             true
@@ -199,7 +196,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         }
     }
 
-    private fun addMarkers(categoria: String?) {
+    private fun addMarkers(cat: String?) {
 
         // Limpiar todos los marcadores actuales
         mGoogleMap?.clear()
@@ -218,7 +215,16 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                 val categoria = jsonObject.getString("categoria")
 
                 // Agregar solo los marcadores que coincidan con la categoría seleccionada
-                if (categoria == null || categoria == categoria) {
+                if (categoria == cat) {
+                    val position = LatLng(latitude, longitude)
+                    mGoogleMap?.addMarker(
+                        MarkerOptions()
+                            .position(position)
+                            .title(title)
+                            .snippet(snippet)
+                    )
+                }
+                else if (cat == null){
                     val position = LatLng(latitude, longitude)
                     mGoogleMap?.addMarker(
                         MarkerOptions()
