@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/category_all" android:title="Todos" />
+    <item android:id="@+id/category_sport" android:title="Deporte" />
+    <item android:id="@+id/category_entertainment" android:title="Entretenimiento" />
+    <item android:id="@+id/category_food" android:title="Comida" />
+</menu>

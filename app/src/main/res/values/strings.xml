@@ -14,4 +14,5 @@
 
 
     <string name="MAPS_KEY">AIzaSyANfNEPGlmNfy8b7Mef8vvsTAXQh2KrlUs</string>
+    <string name="category_filter">categoria</string>
 </resources>

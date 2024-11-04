@@ -115,6 +115,35 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val categoryFilterButton: ImageButton = findViewById(R.id.categoryFilterButton)
+        val categoryMenu = PopupMenu(this, categoryFilterButton)
+        categoryMenu.menuInflater.inflate(R.menu.category_menu, categoryMenu.menu)
+
+        categoryMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.category_all -> {
+                    addMarkers(null)
+                    Toast.makeText(this, "Mostrando todas las categorías", Toast.LENGTH_SHORT).show()
+                }
+                R.id.category_sport -> {
+                    addMarkers("Deporte")
+                    Toast.makeText(this, "Mostrando categoría: Deporte", Toast.LENGTH_SHORT).show()
+                }
+                R.id.category_entertainment -> {
+                    addMarkers("Entretenimiento")
+                    Toast.makeText(this, "Mostrando categoría: Entretenimiento", Toast.LENGTH_SHORT).show()
+                }
+                R.id.category_food -> {
+                    addMarkers("Comida")
+                    Toast.makeText(this, "Mostrando categoría: Comida", Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
+        }
+        categoryFilterButton.setOnClickListener {
+            categoryMenu.show()
+        }
     }
 
     private fun ZoomOnMap(latitudes: LatLng) {
@@ -148,7 +177,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         googleMap.uiSettings?.isMyLocationButtonEnabled = true
         googleMap.uiSettings?.isZoomControlsEnabled = true
 
-        addMarkers()
+        addMarkers(null)
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mGoogleMap?.isMyLocationEnabled = true
@@ -170,7 +199,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         }
     }
 
-    private fun addMarkers() {
+    private fun addMarkers(categoria: String?) {
+
+        // Limpiar todos los marcadores actuales
+        mGoogleMap?.clear()
+
         try {
             val inputStream: InputStream = resources.openRawResource(R.raw.places)
             val json = inputStream.bufferedReader().use { it.readText() }
@@ -182,14 +215,18 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                 val snippet = jsonObject.getString("snippet")
                 val latitude = jsonObject.getDouble("latitude")
                 val longitude = jsonObject.getDouble("longitude")
+                val categoria = jsonObject.getString("categoria")
 
-                val position = LatLng(latitude, longitude)
-                mGoogleMap?.addMarker(
-                    MarkerOptions()
-                        .position(position)
-                        .title(title)
-                        .snippet(snippet)
-                )
+                // Agregar solo los marcadores que coincidan con la categoría seleccionada
+                if (categoria == null || categoria == categoria) {
+                    val position = LatLng(latitude, longitude)
+                    mGoogleMap?.addMarker(
+                        MarkerOptions()
+                            .position(position)
+                            .title(title)
+                            .snippet(snippet)
+                    )
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()

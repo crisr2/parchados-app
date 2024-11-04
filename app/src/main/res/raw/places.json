@@ -3,12 +3,23 @@
     "title": "Tadeo",
     "snippet": "Universidad",
     "latitude": 4.60673810220796,
-    "longitude": -74.06775808836089
+    "longitude": -74.06775808836089,
+    "categoria": "Deporte"
   },
   {
     "title": "Marcador en Chapinero",
     "snippet": "Otro lugar importante",
-    "latitude": 4.656,
-    "longitude": -74.059
+    "latitude": 4.65606576,
+    "longitude": -74.059000,
+    "categoria": "Comida"
+
+  },
+  {
+    "title": "Marcador en Chapinero",
+    "snippet": "Otro lugar importante",
+    "latitude": 4.65667,
+    "longitude": -74.059768,
+    "categoria": "Entretenimiento"
+
   }
 ]
