@@ -1,6 +1,9 @@
 package com.appsmoviles.parchados
 
 import android.Manifest
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.Intent
@@ -68,7 +71,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                 val latLng = place.latLng
                 latLng?.let { ZoomOnMap(it) }
                 if (latLng != null) {
-                    addMarkerOnMap(latLng, place.name ?: "Ubicación")
+                    addMarkerOnMap(latLng)
                 }
             }
 
@@ -122,12 +125,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latitudes, 16f))
     }
 
-    private fun addMarkerOnMap(position: LatLng, title: String) {
+    private fun addMarkerOnMap(position: LatLng) {
+        val titleWithCoordinates = "${position.latitude}, ${position.longitude}"
         currentMarker?.remove()
         currentMarker = mGoogleMap?.addMarker(
             MarkerOptions()
                 .position(position)
-                .title(title)
+                .title(titleWithCoordinates)
         )
         currentMarker?.showInfoWindow()
     }
@@ -155,6 +159,18 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             mGoogleMap?.isMyLocationEnabled = true
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        }
+
+        mGoogleMap?.setOnMarkerClickListener { marker ->
+            val coordinates = "${marker.position.latitude},${marker.position.longitude}"
+
+            // Copiar las coordenadas al portapapeles
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Coordinates", coordinates)
+            clipboard.setPrimaryClip(clip)
+
+            Toast.makeText(this, "Coordenadas copiadas al portapapeles", Toast.LENGTH_SHORT).show()
+            true // Evitar el comportamiento predeterminado del marcador
         }
     }
 

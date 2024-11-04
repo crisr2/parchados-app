@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat
 
 class FormsActivity : AppCompatActivity() {
     private lateinit var descriptionLayout: TextInputLayout
+    private lateinit var locationLayout: TextInputLayout
     private lateinit var phoneLayout: TextInputLayout
     private lateinit var igLayout: TextInputLayout
     private lateinit var tkLayout: TextInputLayout
@@ -46,13 +47,13 @@ class FormsActivity : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel)
 
         descriptionLayout = findViewById(R.id.event_description)
+        locationLayout = findViewById(R.id.event_location)
         phoneLayout = findViewById(R.id.event_phone)
         igLayout = findViewById(R.id.event_ig)
         tkLayout = findViewById(R.id.event_tk)
         linkLayout = findViewById(R.id.event_link)
 
         val titleLayout = findViewById<TextInputLayout>(R.id.event_title)
-        val locationLayout = findViewById<TextInputLayout>(R.id.event_location)
         val localityLayout = findViewById<TextInputLayout>(R.id.event_locality)
         val categoryLayout = findViewById<TextInputLayout>(R.id.event_category)
         val priceLayout = findViewById<TextInputLayout>(R.id.event_price)
@@ -118,7 +119,6 @@ class FormsActivity : AppCompatActivity() {
             })
         }
         setupClearErrorOnType(titleText, titleLayout)
-        setupClearErrorOnType(locationText, locationLayout)
         setupClearErrorOnType(localityText, localityLayout)
         setupClearErrorOnType(categoryText, categoryLayout)
         setupClearErrorOnType(priceText, priceLayout)
@@ -127,6 +127,21 @@ class FormsActivity : AppCompatActivity() {
         setupClearErrorOnType(igText, igLayout)
         setupClearErrorOnType(tkText, tkLayout)
         setupClearErrorOnType(linkText, linkLayout)
+
+        // Ubicación
+        locationText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val input = s.toString()
+                if (input.matches(Regex("^[-+]?\\d*\\.?\\d+,[-+]?\\d*\\.?\\d+$"))) {
+                    locationLayout.error = null
+                } else {
+                    locationLayout.error = "Formato inválido. Usa el formato: latitud,longitud"
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
 
         // Descripción
         descriptionText.addTextChangedListener(object : TextWatcher {
@@ -197,40 +212,6 @@ class FormsActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateFields(vararg fields: TextInputLayout): Boolean {
-        var allValid = true
-        for (field in fields) {
-            if (field.editText?.text.isNullOrEmpty()) {
-                field.error = "Campo obligatorio"
-                allValid = false
-            } else {
-                field.error = null
-            }
-        }
-
-        // Verifica si el campo de descripción excede 250 caracteres
-        val descriptionText: TextInputEditText = descriptionLayout.editText as TextInputEditText
-        val descriptionLength = descriptionText.text?.length ?: 0
-        if (descriptionLength > 250) {
-            allValid = false
-        } else if (descriptionLength > 0) {
-            descriptionLayout.error = null
-        }
-
-        // Verifica si el campo de teléfono tiene más de 10 caracteres
-        val phoneText: TextInputEditText = phoneLayout.editText as TextInputEditText
-        val phoneLength = phoneText.text?.length ?: 0
-        if (phoneLength > 10) {
-            allValid = false
-        } else if (phoneLength < 7) {
-            phoneLayout.error = "El número debe tener al menos 7 dígitos"
-            allValid = false
-        } else {
-            phoneLayout.error = null
-        }
-        return allValid
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
@@ -262,6 +243,51 @@ class FormsActivity : AppCompatActivity() {
     // Imagen
     private fun openImageChooser() {
         imagePickerLauncher.launch("image/*")
+    }
+
+    // Validaciones
+    private fun validateFields(vararg fields: TextInputLayout): Boolean {
+        var allValid = true
+        for (field in fields) {
+            if (field.editText?.text.isNullOrEmpty()) {
+                field.error = "Campo obligatorio"
+                allValid = false
+            } else {
+                field.error = null
+            }
+        }
+
+        // Verifica si el campo de descripción excede 250 caracteres
+        val descriptionText: TextInputEditText = descriptionLayout.editText as TextInputEditText
+        val descriptionLength = descriptionText.text?.length ?: 0
+        if (descriptionLength > 250) {
+            allValid = false
+        } else if (descriptionLength > 0) {
+            descriptionLayout.error = null
+        }
+
+        // Verifica si el campo de teléfono tiene más de 10 caracteres
+        val phoneText: TextInputEditText = phoneLayout.editText as TextInputEditText
+        val phoneLength = phoneText.text?.length ?: 0
+        if (phoneLength > 10) {
+            allValid = false
+        } else if (phoneLength < 7) {
+            phoneLayout.error = "El número debe tener al menos 7 dígitos"
+            allValid = false
+        } else {
+            phoneLayout.error = null
+        }
+
+        // Verifica si el campo de coordenadas es válido
+        val locationText: TextInputEditText = locationLayout.editText as TextInputEditText
+        val location = locationText.text.toString()
+        if (location.matches(Regex("^[-+]?\\d*\\.?\\d+,[-+]?\\d*\\.?\\d+$"))) {
+            locationLayout.error = null
+        } else {
+            locationLayout.error = "Formato inválido. Usa el formato: latitud,longitud"
+            allValid = false
+        }
+        return allValid
     }
 
     private fun validateLinks(): Boolean {

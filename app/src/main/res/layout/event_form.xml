@@ -88,11 +88,12 @@
                 android:id="@+id/event_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/direcci_n"
+                android:hint="@string/coordenadas"
                 app:layout_constraintTop_toBottomOf="@id/event_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="16dp"
+                app:helperText="Ingresa las coordenadas en formato latitud,longitud."
                 app:endIconMode="clear_text"
                 app:boxStrokeColor="@color/degrade_2"
                 app:hintTextColor="@color/degrade_2">

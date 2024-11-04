@@ -3,7 +3,6 @@ agp = "8.5.2"
 coordinatorlayout = "1.2.0"
 drawerlayout = "1.2.0"
 firebaseBom = "33.5.0"
-googleMaterial = "1.12.0"
 kotlin = "1.9.0"
 mapsSecret = "2.0.1"
 coreKtx = "1.13.1"
@@ -18,7 +17,6 @@ constraintlayout = "2.1.4"
 carUiLib = "2.6.0"
 materialVersion = "1.12.0"
 places = "4.0.0"
-ucrop = "2.2.6"
 
 [libraries]
 androidx-coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorlayout" }
@@ -37,7 +35,6 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 car-ui-lib = { group = "com.android.car.ui", name = "car-ui-lib", version.ref = "carUiLib" }
 material-v190 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 places = { module = "com.google.android.libraries.places:places", version.ref = "places" }
-ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

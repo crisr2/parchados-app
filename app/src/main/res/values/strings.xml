@@ -64,4 +64,5 @@
     <string name="eliminar_imagen">Eliminar imagen</string>
     <string name="localidad">*Localidad</string>
     <string name="portada">Portada</string>
+    <string name="coordenadas">*Coordenadas (Ej: 40.02,-23.2)</string>
 </resources>
