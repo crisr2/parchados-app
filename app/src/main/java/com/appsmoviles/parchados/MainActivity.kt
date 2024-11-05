@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -21,6 +22,7 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.appsmoviles.parchados.models.Eventos
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -38,6 +40,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
 import org.json.JSONArray
 import java.io.InputStream
+import com.google.firebase.database.*
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
@@ -47,6 +50,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
     private lateinit var autocompleteFragment: AutocompleteSupportFragment
     private var currentMarker: Marker? = null
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +59,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
 
         // Inicialización de Places y Firebase
         Places.initialize(applicationContext, getString(R.string.google_map_api_key))
+        database = FirebaseDatabase.getInstance().getReference("eventos")
+
 
         // Configuración del AutocompleteSupportFragment
         autocompleteFragment = supportFragmentManager.findFragmentById(R.id.autcomplete_fragment) as AutocompleteSupportFragment
@@ -154,6 +160,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         googleMap.uiSettings?.isMyLocationButtonEnabled = true
         googleMap.uiSettings?.isZoomControlsEnabled = true
 
+        loadMarkersFromFirebase()
         addMarkers()
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -213,6 +220,45 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             e.printStackTrace()
             Toast.makeText(this, "Error al cargar marcadores desde JSON", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun loadMarkersFromFirebase() {
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                mGoogleMap?.clear() // Limpia el mapa para evitar duplicados
+
+                for (eventSnapshot in snapshot.children) {
+                    val evento = eventSnapshot.getValue(Eventos::class.java)
+                    evento?.let {
+                        try {
+                            // Parseo de la ubicación
+                            val (lat, lng) = it.ubicacion?.split(",")!!.map { coord -> coord.toDouble() }
+                            val position = LatLng(lat, lng)
+
+                            // Crea el marcador
+                            mGoogleMap?.addMarker(
+                                MarkerOptions()
+                                    .position(position)
+                                    .title(it.titulo)
+                                    .snippet(it.descripcion)
+                            )
+                        } catch (e: Exception) {
+                            Log.e("MainActivity", "Error parsing location for ${it.titulo}: ${e.message}")
+                        }
+                    }
+                }
+
+                // Centra el mapa en la última ubicación agregada (opcional)
+                snapshot.children.lastOrNull()?.getValue(Eventos::class.java)?.let { lastEvent ->
+                    val (lat, lng) = lastEvent.ubicacion?.split(",")!!.map { coord -> coord.toDouble() }
+                    mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 10f))
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("MainActivity", "Failed to load markers: ${error.message}")
+            }
+        })
     }
 
     // Manejo de navegación
