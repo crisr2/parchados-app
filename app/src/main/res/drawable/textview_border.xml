@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo del TextView -->
+    <solid android:color="#D9D9D9" />
+
+    <!-- Borde alrededor del TextView -->
+    <stroke
+        android:width="2dp"
+        android:color="#9E9E9E" /> <!-- Cambia el color y grosor según lo necesites -->
+
+    <!-- Esquinas redondeadas (opcional) -->
+    <corners android:radius="8dp" /> <!-- Ajusta el radio para redondear las esquinas -->
+
+</shape>

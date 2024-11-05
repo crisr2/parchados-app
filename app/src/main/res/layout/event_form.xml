@@ -85,11 +85,32 @@
 
             <!-- Tercer campo: Ubicación -->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/event_locationt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/direcci_nT"
+                app:layout_constraintTop_toBottomOf="@id/event_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                app:endIconMode="clear_text"
+                app:boxStrokeColor="@color/degrade_2"
+                app:hintTextColor="@color/degrade_2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/locationT_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/event_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/coordenadas"
-                app:layout_constraintTop_toBottomOf="@id/event_description"
+                app:layout_constraintTop_toBottomOf="@id/event_locationt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="16dp"

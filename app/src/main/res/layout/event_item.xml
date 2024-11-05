@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundview_border">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="25dp">
+
+        <!-- Título del evento -->
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@null"
+            android:textSize="30sp"
+            android:gravity="center"/>
+
+        <!-- Imagen del evento -->
+        <ImageView
+            android:id="@+id/eventImageView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/imagen_del_evento"
+            android:src="@drawable/your_image"
+            android:background="@drawable/button_border"
+            android:scaleType="centerCrop"
+            android:elevation="10dp"
+            android:clipToOutline="true"
+            tools:targetApi="s" />
+
+        <!-- Descripción del evento -->
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@null"
+            android:textColor="@android:color/black"
+            android:gravity="center"/>
+
+        <!-- Información del evento (Horario, Teléfono, etc.) -->
+        <LinearLayout
+            android:id="@+id/horarioTelefonoView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/horarioTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@null"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:padding="8dp"
+                android:background="@drawable/textview_border"/>
+
+            <TextView
+                android:id="@+id/telefonoTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:text="@null"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:padding="8dp"
+                android:background="@drawable/textview_border"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/precioCategoriaView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/precioTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@null"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:padding="10dp"
+                android:background="@drawable/textview_border"/>
+
+            <!-- Contenedor para los iconos de redes sociales -->
+            <LinearLayout
+                android:id="@+id/iconoCategoriaView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="8dp"
+                android:background="@drawable/textview_border">
+
+                <!-- Icono de Categoría -->
+                <ImageView
+                    android:id="@+id/entretenimientoIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_entretenimiento"
+                    android:contentDescription="@string/icono_de_categoria_del_evento"
+                    tools:ignore="NestedWeights" />
+
+                <TextView
+                    android:id="@+id/categoriaTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@null"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Contenedor de dirección y redes sociales -->
+        <LinearLayout
+            android:id="@+id/direccionRedesView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <!-- TextView para la dirección -->
+            <TextView
+                android:id="@+id/direccionTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@null"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:padding="8dp"
+                android:background="@drawable/textview_border"/>
+
+            <!-- Contenedor para los iconos de redes sociales -->
+            <LinearLayout
+                android:id="@+id/todasRedesView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="8dp"
+                android:background="@drawable/textview_border">
+
+                <!-- Icono de Instagram -->
+                <ImageView
+                    android:id="@+id/instagramIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_instagram"
+                    android:contentDescription="@string/instagram"
+                    tools:ignore="NestedWeights" />
+
+                <!-- Icono de TikTok -->
+                <ImageView
+                    android:id="@+id/tiktokIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_tiktok"
+                    android:contentDescription="@string/tiktok" />
+
+                <!-- Icono de página web -->
+                <ImageView
+                    android:id="@+id/websiteIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_website"
+                    android:contentDescription="@string/otro_link" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Botón de acción -->
+        <Button
+            android:id="@+id/eventButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@null"
+            android:textColor="@color/black"
+            android:background="@drawable/button_border"/>
+    </LinearLayout>
+</ScrollView>

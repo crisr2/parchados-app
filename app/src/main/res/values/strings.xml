@@ -65,4 +65,8 @@
     <string name="localidad">*Localidad</string>
     <string name="portada">Portada</string>
     <string name="coordenadas">*Coordenadas (Ej: 40.02,-23.2)</string>
+    <string name="direcci_nT">*Dirección</string>
+    <string name="imagen_del_evento">Imagen del evento</string>
+    <string name="icono_de_categoria_del_evento">Icono de categoria del evento</string>
+    <string name="bot_n_para_opciones_de_mapa">Botón para opciones de mapa</string>
 </resources>

@@ -13,7 +13,6 @@ import androidx.appcompat.widget.Toolbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import android.app.TimePickerDialog
-import android.content.Intent
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import android.widget.ImageView
@@ -36,6 +35,7 @@ class FormsActivity : AppCompatActivity() {
 
     private lateinit var titleText: TextInputEditText
     private lateinit var descriptionText: TextInputEditText
+    private lateinit var locationtText: TextInputEditText
     private lateinit var locationText: TextInputEditText
     private lateinit var localityText: AutoCompleteTextView
     private lateinit var phoneText: TextInputEditText
@@ -73,6 +73,7 @@ class FormsActivity : AppCompatActivity() {
 
         val titleLayout = findViewById<TextInputLayout>(R.id.event_title)
         val localityLayout = findViewById<TextInputLayout>(R.id.event_locality)
+        val locationtLayout = findViewById<TextInputLayout>(R.id.event_locationt)
         val categoryLayout = findViewById<TextInputLayout>(R.id.event_category)
         val priceLayout = findViewById<TextInputLayout>(R.id.event_price)
         val entryHoursLayout = findViewById<TextInputLayout>(R.id.event_hours_entry)
@@ -80,6 +81,7 @@ class FormsActivity : AppCompatActivity() {
 
         titleText = titleLayout.editText as TextInputEditText
         descriptionText = descriptionLayout.editText as TextInputEditText
+        locationtText = locationtLayout.editText as TextInputEditText
         locationText = locationLayout.editText as TextInputEditText
         localityText = localityLayout.editText as AutoCompleteTextView
         phoneText = phoneLayout.editText as TextInputEditText
@@ -133,6 +135,7 @@ class FormsActivity : AppCompatActivity() {
             })
         }
         setupClearErrorOnType(titleText, titleLayout)
+        setupClearErrorOnType(locationtText, locationtLayout)
         setupClearErrorOnType(localityText, localityLayout)
         setupClearErrorOnType(categoryText, categoryLayout)
         setupClearErrorOnType(priceText, priceLayout)
@@ -144,17 +147,19 @@ class FormsActivity : AppCompatActivity() {
 
         // Ubicación
         locationText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val input = s.toString()
-                if (input.matches(Regex("^[-+]?\\d*\\.?\\d+,[-+]?\\d*\\.?\\d+$"))) {
-                    locationLayout.error = null
-                } else {
-                    locationLayout.error = "Formato inválido. Usa el formato: latitud,longitud"
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s != null) {
+                    if (s.matches(Regex("^[-+]?\\d*\\.?\\d+,[-+]?\\d*\\.?\\d+$"))) {
+                        locationLayout.error = null
+                    } else {
+                        locationLayout.error = "Formato inválido. Usa el formato: latitud,longitud"
+                    }
                 }
             }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
         })
 
         // Descripción
@@ -209,7 +214,7 @@ class FormsActivity : AppCompatActivity() {
 
         // Validación de los campos
         findViewById<Button>(R.id.submitButton).setOnClickListener {
-            val isValid = validateFields(titleLayout, descriptionLayout, locationLayout, localityLayout, phoneLayout, categoryLayout, priceLayout, exitHoursLayout, entryHoursLayout)
+            val isValid = validateFields(titleLayout, descriptionLayout, locationtLayout, locationLayout, localityLayout, phoneLayout, categoryLayout, priceLayout, exitHoursLayout, entryHoursLayout)
             val allLinksValid = validateLinks()
 
             if (isValid && allLinksValid) {
@@ -217,6 +222,7 @@ class FormsActivity : AppCompatActivity() {
                 // Recoger datos del formulario
                 val title = titleText.text.toString()
                 val description = descriptionText.text.toString()
+                val locationt = locationtText.text.toString()
                 val location = locationText.text.toString()
                 val locality = localityText.text.toString()
                 val phone = phoneText.text.toString()
@@ -229,7 +235,7 @@ class FormsActivity : AppCompatActivity() {
                 val link = linkText.text.toString()
 
                 val eventId = database.push().key!!
-                val eventos = Eventos(eventId, title, description, location, locality, phone, category, price, entryTime, exitTime, instagram, tiktok, link)
+                val eventos = Eventos(eventId, title, description, locationt, location, locality, phone, category, price, entryTime, exitTime, instagram, tiktok, link)
 
                 // Crear un nuevo evento
                 database.child(eventId).setValue(eventos)
@@ -370,12 +376,6 @@ class FormsActivity : AppCompatActivity() {
     private fun isValidUrl(url: String): Boolean {
         val regex = Regex("^(http|https)://[a-zA-Z0-9\\-.]+\\.[a-zA-Z]{2,}(/\\S*)?$")
         return regex.matches(url)
-    }
-
-    // Función para abrir el enlace en el navegador
-    private fun openLinkInBrowser(link: String) {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
-        startActivity(browserIntent)
     }
 
     // Método para limpiar el formulario

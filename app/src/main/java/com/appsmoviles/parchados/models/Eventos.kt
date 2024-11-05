@@ -4,6 +4,7 @@ data class Eventos(
     val eventId: String? = null,
     val titulo: String? = null,
     val descripcion: String? = null,
+    val direccion: String? = null,
     val ubicacion: String? = null,
     val localidad: String? = null,
     val telefono: String? = null,

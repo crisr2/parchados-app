@@ -49,11 +49,13 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
+                android:contentDescription="@string/bot_n_para_opciones_de_mapa"
                 android:src="@drawable/menu_bar"
                 android:background="@null"
                 android:scaleType="fitXY"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
@@ -73,6 +75,8 @@
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment" />
 
             </androidx.cardview.widget.CardView>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

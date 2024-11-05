@@ -1,16 +1,20 @@
 package com.appsmoviles.parchados
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.PopupMenu
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -36,6 +40,7 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.RectangularBounds
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.*
 
@@ -48,7 +53,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
     private var currentMarker: Marker? = null
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
     private lateinit var database: DatabaseReference
+    private val existingCoordinates = mutableListOf<String>()
+    private var eventoId: String? = null
 
+
+    @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -57,7 +66,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         // Inicialización de Places y Firebase
         Places.initialize(applicationContext, getString(R.string.google_map_api_key))
         database = FirebaseDatabase.getInstance().getReference("eventos")
-
 
         // Configuración del AutocompleteSupportFragment
         autocompleteFragment = supportFragmentManager.findFragmentById(R.id.autcomplete_fragment) as AutocompleteSupportFragment
@@ -152,10 +160,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
     override fun onMapReady(googleMap: GoogleMap) {
         mGoogleMap = googleMap
         val initialLatLng = LatLng(4.60971, -74.08175)
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLatLng, 13f))
+        mGoogleMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLatLng, 13f))
 
-        googleMap.uiSettings?.isMyLocationButtonEnabled = true
-        googleMap.uiSettings?.isZoomControlsEnabled = true
+        mGoogleMap!!.uiSettings.isMyLocationButtonEnabled = true
+        mGoogleMap!!.uiSettings.isZoomControlsEnabled = true
+        mGoogleMap!!.uiSettings.isZoomGesturesEnabled = true
+        mGoogleMap!!.uiSettings.isScrollGesturesEnabled = true
 
         loadMarkersFromFirebase()
 
@@ -168,12 +178,81 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         mGoogleMap?.setOnMarkerClickListener { marker ->
             val coordinates = "${marker.position.latitude},${marker.position.longitude}"
 
-            // Copiar las coordenadas al portapapeles
-            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip = ClipData.newPlainText("Coordinates", coordinates)
-            clipboard.setPrimaryClip(clip)
+            if (!existingCoordinates.contains(coordinates)) {
+                // Copiar las coordenadas al portapapeles
+                val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("Coordinates", coordinates)
+                clipboard.setPrimaryClip(clip)
+            }
+
+            eventoId = marker.tag as? String  // Asegúrate de asignar el tag cuando crees el marcador
+            eventoId?.let {
+                mostrarDialogoEvento(it)
+            }
 
             false
+            //false
+        }
+    }
+
+    // Se abre el evento
+    @SuppressLint("InflateParams", "SetTextI18n")
+    private fun mostrarDialogoEvento(eventoId: String) {
+
+        val eventoRef = database.child(eventoId)
+
+        eventoRef.get().addOnSuccessListener { snapshot ->
+            if (snapshot.exists()) {
+                // Cargar los datos del evento
+                val titulo = snapshot.child("titulo").value.toString()
+                val descripcion = snapshot.child("descripcion").value.toString()
+                val horario = snapshot.child("horainicio").value.toString() + " - " + snapshot.child("horafinal").value.toString()
+                val telefono = snapshot.child("telefono").value.toString()
+                val precio = snapshot.child("precio").value.toString()
+                val categoria = snapshot.child("categoria").value.toString()
+                val direccion = snapshot.child("direccion").value.toString()
+                val instagram = snapshot.child("instagram").value.toString()
+                val tiktok = snapshot.child("tiktok").value.toString()
+                val url = snapshot.child("url").value.toString()
+
+                // Inflar el layout del Dialog
+                val dialogView = layoutInflater.inflate(R.layout.event_item, null)
+                val bottomSheetDialog = BottomSheetDialog(this)
+                bottomSheetDialog.setContentView(dialogView)
+
+                // Asignar valores a los elementos del layout
+                dialogView.findViewById<TextView>(R.id.titleTextView).text = titulo
+                dialogView.findViewById<TextView>(R.id.descriptionTextView).text = descripcion
+                dialogView.findViewById<TextView>(R.id.horarioTextView).text = "Horario: $horario"
+                dialogView.findViewById<TextView>(R.id.telefonoTextView).text = "Teléfono: $telefono"
+                dialogView.findViewById<TextView>(R.id.precioTextView).text = "Entrada: $$precio"
+                dialogView.findViewById<TextView>(R.id.categoriaTextView).text = categoria
+                dialogView.findViewById<TextView>(R.id.direccionTextView).text = "Dirección: $direccion"
+
+                // Configurar los íconos de redes sociales
+                val instagramIcon = dialogView.findViewById<ImageView>(R.id.instagramIcon)
+                instagramIcon.setOnClickListener { abrirEnlace("https://instagram.com/${instagram}") }
+
+                val tiktokIcon = dialogView.findViewById<ImageView>(R.id.tiktokIcon)
+                tiktokIcon.setOnClickListener { abrirEnlace("https://tiktok.com/@${tiktok}") }
+
+                val websiteIcon = dialogView.findViewById<ImageView>(R.id.websiteIcon)
+                websiteIcon.setOnClickListener { abrirEnlace(url) }
+
+                // Mostrar el Dialog
+                bottomSheetDialog.show()
+            } else {
+                Toast.makeText(this, "Evento no encontrado", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener {
+            Toast.makeText(this, "Error al cargar el evento", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun abrirEnlace(url: String) {
+        if (url.isNotEmpty()) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
     }
 
@@ -194,6 +273,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 mGoogleMap?.clear() // Limpia el mapa para evitar duplicados
+                existingCoordinates.clear() // Limpia la lista de coordenadas para evitar duplicados
 
                 for (eventSnapshot in snapshot.children) {
                     val evento = eventSnapshot.getValue(Eventos::class.java)
@@ -203,13 +283,16 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                             val (lat, lng) = it.ubicacion?.split(",")!!.map { coord -> coord.toDouble() }
                             val position = LatLng(lat, lng)
 
+                            // Almacena la coordenada en formato "lat,lng" en la lista de coordenadas existentes
+                            existingCoordinates.add("${lat},${lng}")
+
                             // Crea el marcador
-                            mGoogleMap?.addMarker(
+                            val marker = mGoogleMap?.addMarker(
                                 MarkerOptions()
                                     .position(position)
-                                    .title(it.titulo)
-                                    .snippet(it.categoria)
+                                    .title(it.titulo) // Título del evento
                             )
+                            marker?.tag = eventSnapshot.key
                         } catch (e: Exception) {
                             Log.e("MainActivity", "Error parsing location for ${it.titulo}: ${e.message}")
                         }
