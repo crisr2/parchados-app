@@ -141,6 +141,83 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         categoryFilterButton.setOnClickListener {
             categoryMenu.show()
         }
+
+        // Filtro de localidades
+        val locationFilterButton: ImageButton = findViewById(R.id.locationFilterButton)
+        val locationMenu = PopupMenu(this, locationFilterButton)
+        locationMenu.menuInflater.inflate(R.menu.localidades_menu, locationMenu.menu)
+
+        locationMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.localidad_all -> {
+                    addMarkersByLocalidad(null) // Muestra todos sin filtrar por localidad
+                }
+                R.id.localidad_antonio_narino -> {
+                    addMarkersByLocalidad("Antonio Nariño")
+                }
+                R.id.localidad_barrios_unidos -> {
+                    addMarkersByLocalidad("Barrios Unidos")
+                }
+                R.id.localidad_bosa -> {
+                    addMarkersByLocalidad("Bosa")
+                }
+                R.id.localidad_candelaria -> {
+                    addMarkersByLocalidad("Candelaria")
+                }
+                R.id.localidad_chapinero -> {
+                    addMarkersByLocalidad("Chapinero")
+                }
+                R.id.localidad_ciudad_bolivar -> {
+                    addMarkersByLocalidad("Ciudad Bolívar")
+                }
+                R.id.localidad_engativa -> {
+                    addMarkersByLocalidad("Engativá")
+                }
+                R.id.localidad_fontibon -> {
+                    addMarkersByLocalidad("Fontibón")
+                }
+                R.id.localidad_kennedy -> {
+                    addMarkersByLocalidad("Kennedy")
+                }
+                R.id.localidad_los_martires -> {
+                    addMarkersByLocalidad("Los Mártires")
+                }
+                R.id.localidad_puente_aranda -> {
+                    addMarkersByLocalidad("Puente Aranda")
+                }
+                R.id.localidad_rafael_uribe -> {
+                    addMarkersByLocalidad("Rafael Uribe Uribe")
+                }
+                R.id.localidad_san_cristobal -> {
+                    addMarkersByLocalidad("San Cristóbal")
+                }
+                R.id.localidad_santa_fe -> {
+                    addMarkersByLocalidad("Santa Fe")
+                }
+                R.id.localidad_suba -> {
+                    addMarkersByLocalidad("Suba")
+                }
+                R.id.localidad_sumapaz -> {
+                    addMarkersByLocalidad("Sumapaz")
+                }
+                R.id.localidad_teusaquillo -> {
+                    addMarkersByLocalidad("Teusaquillo")
+                }
+                R.id.localidad_tunjuelito -> {
+                    addMarkersByLocalidad("Tunjuelito")
+                }
+                R.id.localidad_usaquen -> {
+                    addMarkersByLocalidad("Usaquén")
+                }
+                R.id.localidad_usme -> {
+                    addMarkersByLocalidad("Usme")
+                }
+            }
+            true
+        }
+        locationFilterButton.setOnClickListener {
+            locationMenu.show()
+        }
     }
 
     private fun ZoomOnMap(latitudes: LatLng) {
@@ -213,6 +290,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                 val latitude = jsonObject.getDouble("latitude")
                 val longitude = jsonObject.getDouble("longitude")
                 val categoria = jsonObject.getString("categoria")
+                val localidad = jsonObject.getString("localidad")
 
                 // Agregar solo los marcadores que coincidan con la categoría seleccionada
                 if (categoria == cat) {
@@ -225,6 +303,38 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                     )
                 }
                 else if (cat == null){
+                    val position = LatLng(latitude, longitude)
+                    mGoogleMap?.addMarker(
+                        MarkerOptions()
+                            .position(position)
+                            .title(title)
+                            .snippet(snippet)
+                    )
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "Error al cargar marcadores desde JSON", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Función para filtrar marcadores por localidad
+    private fun addMarkersByLocalidad(localidad: String?) {
+        mGoogleMap?.clear() // Limpia el mapa
+        try {
+            val inputStream: InputStream = resources.openRawResource(R.raw.places)
+            val json = inputStream.bufferedReader().use { it.readText() }
+            val jsonArray = JSONArray(json)
+
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                val title = jsonObject.getString("title")
+                val snippet = jsonObject.getString("snippet")
+                val latitude = jsonObject.getDouble("latitude")
+                val longitude = jsonObject.getDouble("longitude")
+                val lugarLocalidad = jsonObject.getString("localidad")
+
+                if (localidad == null || lugarLocalidad == localidad) {
                     val position = LatLng(latitude, longitude)
                     mGoogleMap?.addMarker(
                         MarkerOptions()
