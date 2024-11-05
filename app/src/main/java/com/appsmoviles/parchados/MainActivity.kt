@@ -37,9 +37,6 @@ import com.google.android.libraries.places.api.model.RectangularBounds
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.FirebaseApp
-import org.json.JSONArray
-import java.io.InputStream
 import com.google.firebase.database.*
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
@@ -161,7 +158,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         googleMap.uiSettings?.isZoomControlsEnabled = true
 
         loadMarkersFromFirebase()
-        addMarkers()
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mGoogleMap?.isMyLocationEnabled = true
@@ -177,8 +173,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             val clip = ClipData.newPlainText("Coordinates", coordinates)
             clipboard.setPrimaryClip(clip)
 
-            Toast.makeText(this, "Coordenadas copiadas al portapapeles", Toast.LENGTH_SHORT).show()
-            true // Evitar el comportamiento predeterminado del marcador
+            false
         }
     }
 
@@ -192,33 +187,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             } else {
                 Toast.makeText(this, "Permiso de ubicación denegado", Toast.LENGTH_SHORT).show()
             }
-        }
-    }
-
-    private fun addMarkers() {
-        try {
-            val inputStream: InputStream = resources.openRawResource(R.raw.places)
-            val json = inputStream.bufferedReader().use { it.readText() }
-            val jsonArray = JSONArray(json)
-
-            for (i in 0 until jsonArray.length()) {
-                val jsonObject = jsonArray.getJSONObject(i)
-                val title = jsonObject.getString("title")
-                val snippet = jsonObject.getString("snippet")
-                val latitude = jsonObject.getDouble("latitude")
-                val longitude = jsonObject.getDouble("longitude")
-
-                val position = LatLng(latitude, longitude)
-                mGoogleMap?.addMarker(
-                    MarkerOptions()
-                        .position(position)
-                        .title(title)
-                        .snippet(snippet)
-                )
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Toast.makeText(this, "Error al cargar marcadores desde JSON", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -240,7 +208,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                                 MarkerOptions()
                                     .position(position)
                                     .title(it.titulo)
-                                    .snippet(it.descripcion)
+                                    .snippet(it.categoria)
                             )
                         } catch (e: Exception) {
                             Log.e("MainActivity", "Error parsing location for ${it.titulo}: ${e.message}")
