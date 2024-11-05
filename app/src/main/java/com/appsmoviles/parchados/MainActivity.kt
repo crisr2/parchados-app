@@ -42,9 +42,10 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
+import org.json.JSONArray
+import java.io.InputStream
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.firebase.database.*
-
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
@@ -133,6 +134,109 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // Filtro de categorias
+        val categoryFilterButton: ImageButton = findViewById(R.id.categoryFilterButton)
+        val categoryMenu = PopupMenu(this, categoryFilterButton)
+        categoryMenu.menuInflater.inflate(R.menu.category_menu, categoryMenu.menu)
+
+        categoryMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.category_all -> {
+                    addMarkers(null)
+                }
+                R.id.category_sport -> {
+                    addMarkers("Deporte")
+                }
+                R.id.category_entertainment -> {
+                    addMarkers("Entretenimiento")
+                }
+                R.id.category_food -> {
+                    addMarkers("Comida")
+                }
+            }
+            true
+        }
+        categoryFilterButton.setOnClickListener {
+            categoryMenu.show()
+        }
+
+        // Filtro de localidades
+        val locationFilterButton: ImageButton = findViewById(R.id.locationFilterButton)
+        val locationMenu = PopupMenu(this, locationFilterButton)
+        locationMenu.menuInflater.inflate(R.menu.localidades_menu, locationMenu.menu)
+
+        locationMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.localidad_all -> {
+                    addMarkersByLocalidad(null) // Muestra todos sin filtrar por localidad
+                }
+                R.id.localidad_antonio_narino -> {
+                    addMarkersByLocalidad("Antonio Nariño")
+                }
+                R.id.localidad_barrios_unidos -> {
+                    addMarkersByLocalidad("Barrios Unidos")
+                }
+                R.id.localidad_bosa -> {
+                    addMarkersByLocalidad("Bosa")
+                }
+                R.id.localidad_candelaria -> {
+                    addMarkersByLocalidad("Candelaria")
+                }
+                R.id.localidad_chapinero -> {
+                    addMarkersByLocalidad("Chapinero")
+                }
+                R.id.localidad_ciudad_bolivar -> {
+                    addMarkersByLocalidad("Ciudad Bolívar")
+                }
+                R.id.localidad_engativa -> {
+                    addMarkersByLocalidad("Engativá")
+                }
+                R.id.localidad_fontibon -> {
+                    addMarkersByLocalidad("Fontibón")
+                }
+                R.id.localidad_kennedy -> {
+                    addMarkersByLocalidad("Kennedy")
+                }
+                R.id.localidad_los_martires -> {
+                    addMarkersByLocalidad("Los Mártires")
+                }
+                R.id.localidad_puente_aranda -> {
+                    addMarkersByLocalidad("Puente Aranda")
+                }
+                R.id.localidad_rafael_uribe -> {
+                    addMarkersByLocalidad("Rafael Uribe Uribe")
+                }
+                R.id.localidad_san_cristobal -> {
+                    addMarkersByLocalidad("San Cristóbal")
+                }
+                R.id.localidad_santa_fe -> {
+                    addMarkersByLocalidad("Santa Fe")
+                }
+                R.id.localidad_suba -> {
+                    addMarkersByLocalidad("Suba")
+                }
+                R.id.localidad_sumapaz -> {
+                    addMarkersByLocalidad("Sumapaz")
+                }
+                R.id.localidad_teusaquillo -> {
+                    addMarkersByLocalidad("Teusaquillo")
+                }
+                R.id.localidad_tunjuelito -> {
+                    addMarkersByLocalidad("Tunjuelito")
+                }
+                R.id.localidad_usaquen -> {
+                    addMarkersByLocalidad("Usaquén")
+                }
+                R.id.localidad_usme -> {
+                    addMarkersByLocalidad("Usme")
+                }
+            }
+            true
+        }
+        locationFilterButton.setOnClickListener {
+            locationMenu.show()
+        }
     }
 
     private fun ZoomOnMap(latitudes: LatLng) {
@@ -162,6 +266,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
     override fun onMapReady(googleMap: GoogleMap) {
         mGoogleMap = googleMap
         val initialLatLng = LatLng(4.60971, -74.08175)
+        //googleMap?
         mGoogleMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLatLng, 13f))
 
         mGoogleMap!!.uiSettings.isMyLocationButtonEnabled = true
@@ -169,7 +274,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         mGoogleMap!!.uiSettings.isZoomGesturesEnabled = true
         mGoogleMap!!.uiSettings.isScrollGesturesEnabled = true
 
-        loadMarkersFromFirebase()
+        loadMarkersFromFirebase(null)
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mGoogleMap?.isMyLocationEnabled = true
@@ -282,7 +387,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         }
     }
 
-    private fun loadMarkersFromFirebase() {
+    private fun loadMarkersFromFirebase(cat: String?) {
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 mGoogleMap?.clear() // Limpia el mapa para evitar duplicados
@@ -307,14 +412,30 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                                 else -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE) // Color por defecto
                             }
 
-                            // Crea el marcador
-                            val marker = mGoogleMap?.addMarker(
-                                MarkerOptions()
-                                    .position(position)
-                                    .title(it.titulo)
-                                    .icon(color)
-                            )
-                            marker?.tag = eventSnapshot.key
+                            // Agregar solo los marcadores que coincidan con la categoría seleccionada
+                            if (it.categoria == cat) {
+                                // Crea el marcador
+                                val marker = mGoogleMap?.addMarker(
+                                    MarkerOptions()
+                                        .position(position)
+                                        .title(it.titulo)
+                                        .icon(color)
+                                )
+                                marker?.tag = eventSnapshot.key
+                            }
+                            else if (cat == null){
+                                // Crea el marcador
+                                val marker = mGoogleMap?.addMarker(
+                                    MarkerOptions()
+                                        .position(position)
+                                        .title(it.titulo)
+                                        .icon(color)
+                                )
+                                marker?.tag = eventSnapshot.key
+                            } else {
+                                //?
+                            }
+
                         } catch (e: Exception) {
                             Log.e("MainActivity", "Error parsing location for ${it.titulo}: ${e.message}")
                         }
@@ -333,6 +454,62 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             }
         })
     }
+
+    // Función para filtrar marcadores por localidad
+    private fun addMarkersByLocalidad(localidad: String?) {
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                mGoogleMap?.clear() // Limpia el mapa para evitar duplicados
+                existingCoordinates.clear() // Limpia la lista de coordenadas para evitar duplicados
+
+                for (eventSnapshot in snapshot.children) {
+                    val evento = eventSnapshot.getValue(Eventos::class.java)
+                    evento?.let {
+                        try {
+                            // Parseo de la ubicación
+                            val (lat, lng) = it.ubicacion?.split(",")!!.map { coord -> coord.toDouble() }
+                            val position = LatLng(lat, lng)
+
+                            // Almacena la coordenada en formato "lat,lng" en la lista de coordenadas existentes
+                            existingCoordinates.add("${lat},${lng}")
+
+                            // Asigna el color según la categoría
+                            val color = when (it.categoria) {
+                                "Deportes" -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
+                                "Comida" -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)
+                                "Entretenimiento" -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
+                                else -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE) // Color por defecto
+                            }
+
+                            if (localidad == null || it.localidad == localidad) {
+                                // Crea el marcador
+                                val marker = mGoogleMap?.addMarker(
+                                    MarkerOptions()
+                                        .position(position)
+                                        .title(it.titulo)
+                                        .icon(color)
+                                )
+                                marker?.tag = eventSnapshot.key
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            Toast.makeText(this, "Error al cargar marcadores desde JSON", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                // Centra el mapa en la última ubicación agregada (opcional)
+                snapshot.children.lastOrNull()?.getValue(Eventos::class.java)?.let { lastEvent ->
+                    val (lat, lng) = lastEvent.ubicacion?.split(",")!!.map { coord -> coord.toDouble() }
+                    mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 10f))
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("MainActivity", "Failed to load markers: ${error.message}")
+            }
+        })
+    }
+
 
     // Manejo de navegación
     override fun onNavigationItemSelected(item: android.view.MenuItem): Boolean {

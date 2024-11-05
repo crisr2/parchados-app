@@ -52,8 +52,6 @@
         <item>Usme</item>
     </string-array>
 
-    <string name="MAPS_KEY">AIzaSyANfNEPGlmNfy8b7Mef8vvsTAXQh2KrlUs</string>
-
     <string name="entrada">Entrada</string>
     <string name="salida">Salida</string>
     <string name="imagen_seleccionada">Imagen seleccionada</string>
@@ -70,4 +68,8 @@
     <string name="icono_de_categoria_del_evento">Icono de categoria del evento</string>
     <string name="bot_n_para_opciones_de_mapa">Botón para opciones de mapa</string>
     <string name="ir_al_evento">Ir al evento</string>
+
+    <string name="category_filter">categoria</string>
+
+    <string name="MAPS_KEY">AIzaSyANfNEPGlmNfy8b7Mef8vvsTAXQh2KrlUs</string>
 </resources>

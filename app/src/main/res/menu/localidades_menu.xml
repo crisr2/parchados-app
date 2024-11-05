@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/localidad_all" android:title="Todas las localidades" />
+    <item android:id="@+id/localidad_antonio_narino" android:title="Antonio Nariño" />
+    <item android:id="@+id/localidad_barrios_unidos" android:title="Barrios Unidos" />
+    <item android:id="@+id/localidad_bosa" android:title="Bosa" />
+    <item android:id="@+id/localidad_candelaria" android:title="Candelaria" />
+    <item android:id="@+id/localidad_chapinero" android:title="Chapinero" />
+    <item android:id="@+id/localidad_ciudad_bolivar" android:title="Ciudad Bolívar" />
+    <item android:id="@+id/localidad_engativa" android:title="Engativá" />
+    <item android:id="@+id/localidad_fontibon" android:title="Fontibón" />
+    <item android:id="@+id/localidad_kennedy" android:title="Kennedy" />
+    <item android:id="@+id/localidad_los_martires" android:title="Los Mártires" />
+    <item android:id="@+id/localidad_puente_aranda" android:title="Puente Aranda" />
+    <item android:id="@+id/localidad_rafael_uribe" android:title="Rafael Uribe Uribe" />
+    <item android:id="@+id/localidad_san_cristobal" android:title="San Cristóbal" />
+    <item android:id="@+id/localidad_santa_fe" android:title="Santa Fe" />
+    <item android:id="@+id/localidad_suba" android:title="Suba" />
+    <item android:id="@+id/localidad_sumapaz" android:title="Sumapaz" />
+    <item android:id="@+id/localidad_teusaquillo" android:title="Teusaquillo" />
+    <item android:id="@+id/localidad_tunjuelito" android:title="Tunjuelito" />
+    <item android:id="@+id/localidad_usaquen" android:title="Usaquén" />
+    <item android:id="@+id/localidad_usme" android:title="Usme" />
+</menu>
