@@ -50,6 +50,8 @@ dependencies {
 
     // Se agregan algunas librerias para el forms de registro de eventos
     implementation libs.material.v190
+    //implementation libs.firebase.database
+    implementation 'com.google.firebase:firebase-database:21.0.0'
 
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
@@ -58,5 +60,6 @@ dependencies {
     implementation libs.firebase.analytics
     implementation libs.google.maps
     implementation libs.places
+
 
 }

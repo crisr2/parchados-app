@@ -35,6 +35,7 @@ import com.google.android.libraries.places.api.model.RectangularBounds
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.FirebaseApp
 import org.json.JSONArray
 import java.io.InputStream
 
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        // Inicialización de Places
+        // Inicialización de Places y Firebase
         Places.initialize(applicationContext, getString(R.string.google_map_api_key))
 
         // Configuración del AutocompleteSupportFragment

@@ -20,7 +20,11 @@ import android.widget.ImageView
 import java.util.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.appsmoviles.parchados.models.Eventos
+import com.google.firebase.FirebaseApp
 import java.text.SimpleDateFormat
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class FormsActivity : AppCompatActivity() {
     private lateinit var descriptionLayout: TextInputLayout
@@ -30,16 +34,30 @@ class FormsActivity : AppCompatActivity() {
     private lateinit var tkLayout: TextInputLayout
     private lateinit var linkLayout: TextInputLayout
 
+    private lateinit var titleText: TextInputEditText
+    private lateinit var descriptionText: TextInputEditText
+    private lateinit var locationText: TextInputEditText
+    private lateinit var localityText: AutoCompleteTextView
+    private lateinit var phoneText: TextInputEditText
+    private lateinit var categoryText: AutoCompleteTextView
+    private lateinit var priceText: TextInputEditText
     private lateinit var entryTimeText: TextInputEditText
     private lateinit var exitTimeText: TextInputEditText
+    private lateinit var igText: TextInputEditText
+    private lateinit var tkText: TextInputEditText
+    private lateinit var linkText: TextInputEditText
 
     private lateinit var imageView: ImageView
     private lateinit var imagePickerLauncher: ActivityResultLauncher<String>
     private lateinit var removeImageButton: ImageView
 
+    private val database: DatabaseReference = FirebaseDatabase.getInstance().getReference("eventos")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.event_form)
+
+        FirebaseApp.initializeApp(this)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -60,22 +78,18 @@ class FormsActivity : AppCompatActivity() {
         val entryHoursLayout = findViewById<TextInputLayout>(R.id.event_hours_entry)
         val exitHoursLayout = findViewById<TextInputLayout>(R.id.event_hours_exit)
 
-        val titleText: TextInputEditText = titleLayout.editText as TextInputEditText
-        val descriptionText: TextInputEditText = descriptionLayout.editText as TextInputEditText
-        val locationText: TextInputEditText = locationLayout.editText as TextInputEditText
-        val localityText: AutoCompleteTextView = localityLayout.editText as AutoCompleteTextView
-        val phoneText: TextInputEditText = phoneLayout.editText as TextInputEditText
-        val categoryText: AutoCompleteTextView = categoryLayout.editText as AutoCompleteTextView
-        val priceText: TextInputEditText = priceLayout.editText as TextInputEditText
-        val entryHoursText: TextInputEditText = entryHoursLayout.editText as TextInputEditText
-        val exitHoursText: TextInputEditText = exitHoursLayout.editText as TextInputEditText
-        val igText: TextInputEditText = igLayout.editText as TextInputEditText
-        val tkText: TextInputEditText = tkLayout.editText as TextInputEditText
-        val linkText: TextInputEditText = linkLayout.editText as TextInputEditText
-
-        // Reloj
+        titleText = titleLayout.editText as TextInputEditText
+        descriptionText = descriptionLayout.editText as TextInputEditText
+        locationText = locationLayout.editText as TextInputEditText
+        localityText = localityLayout.editText as AutoCompleteTextView
+        phoneText = phoneLayout.editText as TextInputEditText
+        categoryText = categoryLayout.editText as AutoCompleteTextView
+        priceText = priceLayout.editText as TextInputEditText
         entryTimeText = entryHoursLayout.editText as TextInputEditText
         exitTimeText = exitHoursLayout.editText as TextInputEditText
+        igText = igLayout.editText as TextInputEditText
+        tkText = tkLayout.editText as TextInputEditText
+        linkText = linkLayout.editText as TextInputEditText
 
 
         // Imagen
@@ -122,8 +136,8 @@ class FormsActivity : AppCompatActivity() {
         setupClearErrorOnType(localityText, localityLayout)
         setupClearErrorOnType(categoryText, categoryLayout)
         setupClearErrorOnType(priceText, priceLayout)
-        setupClearErrorOnType(entryHoursText, entryHoursLayout)
-        setupClearErrorOnType(exitHoursText, exitHoursLayout)
+        setupClearErrorOnType(entryTimeText, entryHoursLayout)
+        setupClearErrorOnType(exitTimeText, exitHoursLayout)
         setupClearErrorOnType(igText, igLayout)
         setupClearErrorOnType(tkText, tkLayout)
         setupClearErrorOnType(linkText, linkLayout)
@@ -199,8 +213,34 @@ class FormsActivity : AppCompatActivity() {
             val allLinksValid = validateLinks()
 
             if (isValid && allLinksValid) {
-                Toast.makeText(this, "Formulario enviado correctamente", Toast.LENGTH_SHORT).show()
-                // Aquí puedes agregar la lógica para manejar el envío del formulario
+
+                // Recoger datos del formulario
+                val title = titleText.text.toString()
+                val description = descriptionText.text.toString()
+                val location = locationText.text.toString()
+                val locality = localityText.text.toString()
+                val phone = phoneText.text.toString()
+                val category = categoryText.text.toString()
+                val price = priceText.text.toString()
+                val entryTime = entryTimeText.text.toString()
+                val exitTime = exitTimeText.text.toString()
+                val instagram = igText.text.toString()
+                val tiktok = tkText.text.toString()
+                val link = linkText.text.toString()
+
+                val eventId = database.push().key!!
+                val eventos = Eventos(eventId, title, description, location, locality, phone, category, price, entryTime, exitTime, instagram, tiktok, link)
+
+                // Crear un nuevo evento
+                database.child(eventId).setValue(eventos)
+                    .addOnCompleteListener{
+                        Toast.makeText(this, "Formulario enviado correctamente", Toast.LENGTH_SHORT).show()
+                        clearForm()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "error ${it.message}", Toast.LENGTH_SHORT).show()
+                    }
+
             }
         }
 
@@ -281,11 +321,11 @@ class FormsActivity : AppCompatActivity() {
         // Verifica si el campo de coordenadas es válido
         val locationText: TextInputEditText = locationLayout.editText as TextInputEditText
         val location = locationText.text.toString()
-        if (location.matches(Regex("^[-+]?\\d*\\.?\\d+,[-+]?\\d*\\.?\\d+$"))) {
-            locationLayout.error = null
-        } else {
+        if (!location.matches(Regex("^[-+]?\\d*\\.?\\d+,[-+]?\\d*\\.?\\d+$"))) {
             locationLayout.error = "Formato inválido. Usa el formato: latitud,longitud"
             allValid = false
+        } else {
+            locationLayout.error = null
         }
         return allValid
     }
@@ -336,6 +376,25 @@ class FormsActivity : AppCompatActivity() {
     private fun openLinkInBrowser(link: String) {
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
         startActivity(browserIntent)
+    }
+
+    // Método para limpiar el formulario
+    private fun clearForm() {
+        titleText.text?.clear()
+        descriptionText.text?.clear()
+        locationText.text?.clear()
+        localityText.text?.clear()
+        phoneText.text?.clear()
+        categoryText.text?.clear()
+        priceText.text?.clear()
+        entryTimeText.text?.clear()
+        exitTimeText.text?.clear()
+        igText.text?.clear()
+        tkText.text?.clear()
+        linkText.text?.clear()
+        imageView.setImageDrawable(null) // Opcional: limpia la imagen seleccionada
+        imageView.visibility = View.GONE
+        removeImageButton.visibility = View.GONE
     }
 
 }

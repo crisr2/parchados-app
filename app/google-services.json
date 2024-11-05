@@ -1,8 +1,9 @@
 {
   "project_info": {
     "project_number": "152690861869",
+    "firebase_url": "https://parchados-921e6-default-rtdb.firebaseio.com",
     "project_id": "parchados-921e6",
-    "storage_bucket": "parchados-921e6.appspot.com"
+    "storage_bucket": "parchados-921e6.firebasestorage.app"
   },
   "client": [
     {
