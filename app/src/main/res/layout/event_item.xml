@@ -110,7 +110,7 @@
 
                 <!-- Icono de Categoría -->
                 <ImageView
-                    android:id="@+id/entretenimientoIcon"
+                    android:id="@+id/categoryIcon"
                     android:layout_width="0dp"
                     android:layout_height="25dp"
                     android:layout_weight="1"
@@ -197,7 +197,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@null"
+            android:text="@string/ir_al_evento"
             android:textColor="@color/black"
             android:background="@drawable/button_border"/>
     </LinearLayout>

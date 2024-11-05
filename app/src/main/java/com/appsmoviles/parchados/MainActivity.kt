@@ -42,7 +42,9 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.firebase.database.*
+
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
@@ -239,6 +241,17 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                 val websiteIcon = dialogView.findViewById<ImageView>(R.id.websiteIcon)
                 websiteIcon.setOnClickListener { abrirEnlace(url) }
 
+                // Configurar el icono de categoría
+                val categoriaIcono = dialogView.findViewById<ImageView>(R.id.categoryIcon) // Asegúrate de tener un ImageView para el icono de categoría en tu layout
+
+                // Asignar el icono según la categoría
+                val icono = when (categoria) {
+                    "Deportes" -> R.drawable.ic_deportes
+                    "Comida" -> R.drawable.ic_comida
+                    else -> R.drawable.ic_entretenimiento
+                }
+                categoriaIcono.setImageResource(icono)
+
                 // Mostrar el Dialog
                 bottomSheetDialog.show()
             } else {
@@ -286,11 +299,20 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                             // Almacena la coordenada en formato "lat,lng" en la lista de coordenadas existentes
                             existingCoordinates.add("${lat},${lng}")
 
+                            // Asigna el color según la categoría
+                            val color = when (it.categoria) {
+                                "Deportes" -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
+                                "Comida" -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)
+                                "Entretenimiento" -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
+                                else -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE) // Color por defecto
+                            }
+
                             // Crea el marcador
                             val marker = mGoogleMap?.addMarker(
                                 MarkerOptions()
                                     .position(position)
-                                    .title(it.titulo) // Título del evento
+                                    .title(it.titulo)
+                                    .icon(color)
                             )
                             marker?.tag = eventSnapshot.key
                         } catch (e: Exception) {
