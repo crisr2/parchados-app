@@ -30,7 +30,7 @@
         android:layout_marginEnd="132dp"
         android:layout_marginBottom="150dp"
         android:text="@string/button_text_registro"
-        android:backgroundTint="#101C21"
+        android:backgroundTint="@color/color1"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

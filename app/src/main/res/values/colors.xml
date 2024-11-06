@@ -3,13 +3,22 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- revisar luego y dejar solo un nombre -->
     <color name="da_igual">#1E90FF</color>
     <color name="background">#101C20</color>
 
     <color name="degrade_1">#101C20</color>
     <color name="degrade_2">#1E90FF</color>
     <color name="degrade_3">#00C2FF</color>
+
+    <color name="color1">#101C21</color>
+    <color name="color2">#9E9E9E</color>
+    <color name="color3">#144253</color>
+    <color name="color4">#000000</color>
+    <color name="color5">#003366</color>
+    <color name="color6">#757575</color>
+    <color name="color7">#00000000</color>
+    <color name="color8">#E0E0E0</color>
+    <color name="color9">#D9D9D9</color>
 
     <color name="text">#00C2FF</color>
     <color name="subs">#B0BEC5</color>

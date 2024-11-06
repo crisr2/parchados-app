@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Fondo del TextView -->
-    <solid android:color="#D9D9D9" />
+    <solid android:color="@color/color9" />
 
     <!-- Borde alrededor del TextView -->
     <stroke
         android:width="2dp"
-        android:color="#9E9E9E" />
+        android:color="@color/color2" />
 
     <corners android:radius="8dp" />
 

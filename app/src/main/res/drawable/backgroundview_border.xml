@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <!-- Fondo transparente y borde negro para el botón -->
+        <!-- Fondo transparente y borde gris para el botón -->
         <shape>
             <solid android:color="@color/white" /> <!-- Fondo transparente -->
             <stroke
                 android:width="2dp"
-                android:color="#757575" /> <!-- Borde negro -->
+                android:color="@color/color6" /> <!-- Borde gris -->
             <corners android:radius="20dp" /> <!-- Bordes redondeados -->
         </shape>
     </item>

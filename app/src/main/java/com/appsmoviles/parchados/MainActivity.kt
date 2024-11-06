@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             bottomSheetDialog.window?.setDimAmount(0f)
             bottomSheetDialog.setContentView(filterView)
 
-            // Acceder al filtro de categorias
+            // Acceder al filtro de categorías
             val categoryFilterButton: Button = filterView.findViewById(R.id.categoryFilterButton)
             categoryFilterButton.setOnClickListener {
                 showCategoryBottomSheet() // Función que crearemos para mostrar las categorías
@@ -164,7 +164,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
 
     }
 
-    // Función para mostrar el Bottom Sheet de localidades, cerrando también el diálogo de filtros
+    // Función para mostrar el Bottom Sheet de localidades
     private fun showLocationBottomSheet(filterBottomSheetDialog: BottomSheetDialog) {
         val locationView = layoutInflater.inflate(R.layout.location_item, null)
         val locationBottomSheetDialog = BottomSheetDialog(this)
@@ -328,13 +328,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
 
 
 
-            eventoId = marker.tag as? String  // Asegúrate de asignar el tag cuando crees el marcador
+            eventoId = marker.tag as? String
             eventoId?.let {
                 mostrarDialogoEvento(it, origin, coordinates)
             }
 
             false
-            //false
         }
     }
 
@@ -399,14 +398,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                         Toast.makeText(this, "El enlace del sitio web está vacío", Toast.LENGTH_SHORT).show()
                     }
                 }
-                // Configurar el icono de categoría
+                // Configurar el ícono de categoría
                 val categoriaIcono = dialogView.findViewById<ImageView>(R.id.categoryIcon) // Asegúrate de tener un ImageView para el icono de categoría en tu layout
 
                 // Configurar botón de 'ir al evento'
                 val rutaBoton = dialogView.findViewById<Button>(R.id.eventButton)
                 rutaBoton.setOnClickListener { abrirEnlace("https://www.google.com/maps/dir/?api=1&origin=$origen&destination=$destino")}
 
-                // Asignar el icono según la categoría
+                // Asignar el ícono según la categoría
                 val icono = when (categoria) {
                     "Deportes" -> R.drawable.ic_deportes
                     "Comida" -> R.drawable.ic_comida

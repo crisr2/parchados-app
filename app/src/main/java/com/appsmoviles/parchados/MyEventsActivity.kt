@@ -91,7 +91,6 @@ class MyEventsActivity : AppCompatActivity() {
 
 
 
-
     // Método para actualizar la lista de eventos después de la eliminación
     private fun refreshEventList() {
         fetchMyEvents()  // Recargamos los eventos desde Firebase

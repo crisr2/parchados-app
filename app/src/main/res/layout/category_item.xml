@@ -29,7 +29,7 @@
             android:layout_height="40dp"
             android:scaleX="1.5"
             android:scaleY="1.5"
-            android:buttonTint="#9e9e9e"/>
+            android:buttonTint="@color/color2"/>
 
         <TextView
             android:id="@+id/view_all"
@@ -59,7 +59,7 @@
             android:layout_height="40dp"
             android:scaleX="1.5"
             android:scaleY="1.5"
-            android:buttonTint="#9e9e9e" />
+            android:buttonTint="@color/color2" />
 
         <ImageView
             android:layout_width="24dp"
@@ -96,7 +96,7 @@
             android:layout_height="40dp"
             android:scaleX="1.5"
             android:scaleY="1.5"
-            android:buttonTint="#9e9e9e"/>
+            android:buttonTint="@color/color2"/>
 
         <ImageView
             android:layout_width="24dp"
@@ -133,7 +133,7 @@
             android:layout_height="40dp"
             android:scaleX="1.5"
             android:scaleY="1.5"
-            android:buttonTint="#9e9e9e" />
+            android:buttonTint="@color/color2" />
 
         <ImageView
             android:layout_width="24dp"

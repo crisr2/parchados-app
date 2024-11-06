@@ -19,7 +19,6 @@ import android.widget.ImageView
 import java.util.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import com.appsmoviles.parchados.models.Eventos
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -105,7 +104,7 @@ class FormsActivity : AppCompatActivity() {
         }
 
         // Imagen
-        imageView = findViewById(R.id.selected_image) // Asegúrate de que tengas un ImageView con este ID
+        imageView = findViewById(R.id.selected_image)
         removeImageButton = findViewById(R.id.remove_image_button)
 
         imagePickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -460,7 +459,7 @@ class FormsActivity : AppCompatActivity() {
         igText.text?.clear()
         tkText.text?.clear()
         linkText.text?.clear()
-        imageView.setImageDrawable(null) // Opcional: limpia la imagen seleccionada
+        imageView.setImageDrawable(null)
         imageView.visibility = View.GONE
         removeImageButton.visibility = View.GONE
     }

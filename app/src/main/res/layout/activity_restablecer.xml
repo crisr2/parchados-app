@@ -31,7 +31,7 @@
         android:layout_marginStart="130dp"
         android:layout_marginEnd="131dp"
         android:layout_marginBottom="252dp"
-        android:backgroundTint="#101C21"
+        android:backgroundTint="@color/color1"
         android:text="@string/btn_restablecer"
         android:textColor="@color/degrade_3"
         android:textSize="18sp"
