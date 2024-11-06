@@ -12,9 +12,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/degrade_2"
+        android:background="@color/black"
         app:title="@string/registra_tu_evento"
-        app:titleTextColor="@color/degrade_1"
+        app:titleTextColor="@color/white"
         tools:ignore="MissingConstraints" />
 
     <!-- Contenido del formulario aquí -->
@@ -43,7 +43,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:endIconMode="clear_text"
                 app:boxStrokeColor="@color/degrade_2"
-                app:hintTextColor="@color/degrade_2">
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/title_text"
@@ -67,9 +71,12 @@
                 app:counterEnabled="true"
                 app:counterMaxLength="250"
                 app:counterTextColor="@color/degrade_2"
-                app:errorEnabled="true"
                 app:boxStrokeColor="@color/degrade_2"
-                app:hintTextColor="@color/degrade_2">
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/description_text"
@@ -86,17 +93,47 @@
 
             <!-- Tercer campo: Ubicación -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/event_location"
+                android:id="@+id/event_locationt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/direcci_n"
+                android:hint="@string/direcci_nT"
                 app:layout_constraintTop_toBottomOf="@id/event_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="16dp"
                 app:endIconMode="clear_text"
                 app:boxStrokeColor="@color/degrade_2"
-                app:hintTextColor="@color/degrade_2">
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/locationT_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/event_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/coordenadas"
+                app:layout_constraintTop_toBottomOf="@id/event_locationt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                app:helperText="Ingresa las coordenadas en formato latitud,longitud."
+                app:endIconMode="clear_text"
+                app:boxStrokeColor="@color/degrade_2"
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/location_text"
@@ -106,13 +143,40 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/event_locality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/event_category"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                android:hint="@string/localidad"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                app:boxStrokeColor="@color/degrade_2"
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/locality_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:simpleItems="@array/localidades"
+                    android:inputType="none"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!-- Cuarto campo: Teléfono del organizador/sitio -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/event_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/tel_fono"
-                app:layout_constraintTop_toTopOf="@id/event_location"
+                app:layout_constraintTop_toTopOf="@id/event_locality"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="16dp"
@@ -121,8 +185,11 @@
                 app:hintTextColor="@color/degrade_2"
                 app:counterEnabled="true"
                 app:counterMaxLength="10"
-                app:errorEnabled="true"
-                app:counterTextColor="@color/degrade_2">
+                app:counterTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phone_text"
@@ -153,7 +220,11 @@
                     android:hint="@string/categor_a"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     app:boxStrokeColor="@color/degrade_2"
-                    app:hintTextColor="@color/degrade_2">
+                    app:hintTextColor="@color/degrade_2"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/category_view"
@@ -178,7 +249,11 @@
                     app:prefixTextColor="@color/degrade_2"
                     app:endIconMode="clear_text"
                     app:boxStrokeColor="@color/degrade_2"
-                    app:hintTextColor="@color/degrade_2">
+                    app:hintTextColor="@color/degrade_2"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/price_text"
@@ -189,7 +264,7 @@
 
             </LinearLayout>
 
-            <!-- LinearLayout horizontal para Horas y Minutos -->
+            <!-- Séptimo campo: Horario del evento -->
             <LinearLayout
                 android:id="@+id/event_hours_minutes"
                 android:layout_width="match_parent"
@@ -207,57 +282,196 @@
                     android:text="@string/horario"
                     android:textSize="16sp"/>
 
-                <!-- Campo para las horas (0-23) -->
+                <!-- Campo para las entrada -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/event_hours"
+                    android:id="@+id/event_hours_entry"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
-                    android:hint="@string/horas"
+                    android:hint="@string/entrada"
                     app:boxStrokeColor="@color/degrade_2"
                     app:hintTextColor="@color/degrade_2"
-                    app:helperTextEnabled="true">
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/hours_text"
+                        android:id="@+id/entry_time_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:maxLength="2"/>
+                        android:inputType="none"
+                        android:focusable="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Campo para los minutos (0-59) -->
+                <!-- Campo para la salida -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/event_minutes"
+                    android:id="@+id/event_hours_exit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:hint="@string/minutos"
+                    android:hint="@string/salida"
                     app:boxStrokeColor="@color/degrade_2"
                     app:hintTextColor="@color/degrade_2"
-                    app:helperTextEnabled="true">
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/minutes_text"
+                        android:id="@+id/exit_time_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:maxLength="2"/>
+                        android:inputType="none"
+                        android:focusable="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/submitButton"
-                android:layout_width="wrap_content"
+            <!-- Octavo campo: Añadir imagen -->
+            <LinearLayout
+                android:id="@+id/event_image_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/enviar"
-                app:layout_constraintTop_toBottomOf="@id/event_location"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@id/event_hours_minutes"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp" />
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/event_image_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/portada"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="20dp"/>
+
+                <!-- Botones imagen -->
+                <Button
+                    android:id="@+id/event_image_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:text="@string/seleccionar_imagen"/>
+
+            </LinearLayout>
+
+            <!-- ImageView para mostrar la imagen seleccionada en 400x150 -->
+            <ImageView
+                android:id="@+id/selected_image"
+                android:layout_width="400dp"
+                android:layout_height="150dp"
+                app:layout_constraintTop_toBottomOf="@id/event_image_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/imagen_seleccionada"
+                android:visibility = "gone"/>
+
+            <ImageView
+                android:id="@+id/remove_image_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|top"
+                android:src="@android:drawable/ic_delete"
+                android:contentDescription="@string/eliminar_imagen"
+                android:visibility="gone"/>
+
+            <!-- Noveno campo: Links del evento -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/event_ig"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/event_image_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                android:hint="@string/instagram"
+                app:prefixText="/@"
+                app:prefixTextColor="@color/degrade_2"
+                app:endIconMode="clear_text"
+                app:boxStrokeColor="@color/degrade_2"
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ig_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/event_tk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/event_ig"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                android:hint="@string/tiktok"
+                app:prefixText="/@"
+                app:prefixTextColor="@color/degrade_2"
+                app:endIconMode="clear_text"
+                app:boxStrokeColor="@color/degrade_2"
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tk_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/event_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/event_tk"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                android:hint="@string/otro_link"
+                app:prefixTextColor="@color/degrade_2"
+                app:endIconMode="clear_text"
+                app:boxStrokeColor="@color/degrade_2"
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/enviar"
+                app:layout_constraintTop_toBottomOf="@id/event_ig"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:backgroundTint="@color/degrade_2"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

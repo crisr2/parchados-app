@@ -61,7 +61,60 @@
     <string name="correo_restablecer">Escribe un correo</string>
     <string name="btn_restablecer">Restablecer</string>
     <string name="ver_perfil">Ver Perfil</string>
-    <string name="MAPS_KEY">AIzaSyANfNEPGlmNfy8b7Mef8vvsTAXQh2KrlUs</string>
 
+    <string-array name="localidades">
+        <item>Antonio Nariño</item>
+        <item>Barrios Unidos</item>
+        <item>Bosa</item>
+        <item>Candelaria</item>
+        <item>Chapinero</item>
+        <item>Ciudad Bolívar</item>
+        <item>Engativá</item>
+        <item>Fontibón</item>
+        <item>Kennedy</item>
+        <item>Los Mártires</item>
+        <item>Puente Aranda</item>
+        <item>Rafael Uribe Uribe</item>
+        <item>San Cristóbal</item>
+        <item>Santa Fe</item>
+        <item>Suba</item>
+        <item>Sumapaz</item>
+        <item>Teusaquillo</item>
+        <item>Tunjuelito</item>
+        <item>Usaquén</item>
+        <item>Usme</item>
+    </string-array>
+
+    <string name="entrada">Inicio</string>
+    <string name="salida">Final</string>
+    <string name="imagen_seleccionada">Imagen seleccionada</string>
+    <string name="seleccionar_imagen">Seleccionar imagen</string>
+    <string name="instagram">Instagram</string>
+    <string name="tiktok">TikTok</string>
+    <string name="otro_link">Otra URL</string>
+    <string name="eliminar_imagen">Eliminar imagen</string>
+    <string name="localidad">*Localidad</string>
+    <string name="portada">Portada</string>
+    <string name="coordenadas">*Coordenadas (Ej: 40.02,-23.2)</string>
+    <string name="direcci_nT">*Dirección</string>
+    <string name="imagen_del_evento">Imagen del evento</string>
+    <string name="icono_de_categoria_del_evento">Icono de categoria del evento</string>
+    <string name="bot_n_para_opciones_de_mapa">Botón para opciones de mapa</string>
+    <string name="ir_al_evento">Ir al evento</string>
+
+    <string name="category_filter">categoria</string>
+
+    <string name="categoria">Categoría</string>
+    <string name="localidad2">Localidad</string>
+    <string name="filtrar_por">Filtrar por:</string>
+    <string name="comida">Comida</string>
+    <string name="entretenimiento">Entretenimiento</string>
+    <string name="deportes">Deportes</string>
+    <string name="todos">Todos</string>
+    <string name="filtro_categor_as">Filtro - Categorías:</string>
+    <string name="filtro_localidades">Filtro - Localidades</string>
+    <string name="mis_eventos">Mis eventos</string>
+
+    <string name="MAPS_KEY">AIzaSyANfNEPGlmNfy8b7Mef8vvsTAXQh2KrlUs</string>
 
 </resources>

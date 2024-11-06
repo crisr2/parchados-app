@@ -3,6 +3,8 @@ agp = "8.5.2"
 coordinatorlayout = "1.2.0"
 drawerlayout = "1.2.0"
 firebaseBom = "33.5.0"
+firebaseDatabase = "21.0.0"
+googleServices = "4.4.2"
 googleMaterial = "1.12.0"
 kotlin = "1.9.0"
 mapsSecret = "2.0.1"
@@ -20,6 +22,7 @@ carUiLib = "2.6.0"
 materialVersion = "1.12.0"
 places = "4.0.0"
 firebaseAuthKtx = "23.1.0"
+googleGmsGoogleServices = "4.4.2"
 
 [libraries]
 androidx-coordinatorlayout = { module = "androidx.coordinatorlayout:coordinatorlayout", version.ref = "coordinatorlayout" }
@@ -28,6 +31,8 @@ androidx-drawerlayout = { module = "androidx.drawerlayout:drawerlayout", version
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-database = { module = "com.google.firebase:firebase-database", version.ref = "firebaseDatabase" }
+google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -46,3 +51,4 @@ firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx",
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 map-secret = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "mapsSecret" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }

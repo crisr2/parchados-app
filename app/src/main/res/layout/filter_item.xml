@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@drawable/backgroundview_border"
+    android:padding="25dp">
+
+    <TextView
+        android:id="@+id/filterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/filtrar_por"
+        android:gravity="center"
+        android:textSize="20sp"/>
+
+    <!-- Contenedor para los iconos de redes sociales -->
+    <LinearLayout
+        android:id="@+id/allFilters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp">
+
+        <!-- Botones de acción -->
+        <Button
+            android:id="@+id/categoryFilterButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/categoria"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="@drawable/button_border"/>
+
+        <Button
+            android:id="@+id/locationFilterButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:text="@string/localidad2"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="@drawable/button_border"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

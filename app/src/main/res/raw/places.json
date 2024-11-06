@@ -1,14 +1,375 @@
 [
   {
-    "title": "Tadeo",
+    "title": "Zona de deportes",
     "snippet": "Universidad",
     "latitude": 4.60673810220796,
-    "longitude": -74.06775808836089
+    "longitude": -74.06775808836089,
+    "categoria": "Deporte",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Chapinero"
+
   },
   {
     "title": "Marcador en Chapinero",
     "snippet": "Otro lugar importante",
-    "latitude": 4.656,
-    "longitude": -74.059
+    "latitude": 4.65606576,
+    "longitude": -74.059000,
+    "categoria": "Comida",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Chapinero"
+
+  },
+  {
+    "title": "Marcador en Chapinero",
+    "snippet": "Otro lugar importante",
+    "latitude": 4.65667,
+    "longitude": -74.059768,
+    "categoria": "Entretenimiento",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Chapinero"
+
+  },
+  {
+    "title": "Cancha de Fútbol Antonio Nariño",
+    "snippet": "Cancha de fútbol al aire libre",
+    "latitude": 4.5937,
+    "longitude": -74.0919,
+    "categoria": "Deporte",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Antonio Nariño"
+  },
+  {
+    "title": "Gimnasio Barrios Unidos",
+    "snippet": "Gimnasio con pesas y cardio",
+    "latitude": 4.6745,
+    "longitude": -74.0709,
+    "categoria": "Deporte",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Barrios Unidos"
+  },
+  {
+    "title": "Parque Deportivo Bosa",
+    "snippet": "Parque con canchas y zonas deportivas",
+    "latitude": 4.6289,
+    "longitude": -74.1845,
+    "categoria": "Deporte",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Bosa"
+  },
+  {
+    "title": "Escuela de Natación Candelaria",
+    "snippet": "Piscina para clases de natación",
+    "latitude": 4.5993,
+    "longitude": -74.0760,
+    "categoria": "Deporte",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Candelaria"
+  },
+  {
+    "title": "Centro Deportivo Chapinero",
+    "snippet": "Centro deportivo con múltiples actividades",
+    "latitude": 4.6483,
+    "longitude": -74.0588,
+    "categoria": "Deporte",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Chapinero"
+  },
+  {
+    "title": "Parque de Entretenimiento Ciudad Bolívar",
+    "snippet": "Parque de atracciones",
+    "latitude": 4.5762,
+    "longitude": -74.1643,
+    "categoria": "Entretenimiento",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Ciudad Bolívar"
+  },
+  {
+    "title": "Cine Engativá",
+    "snippet": "Cine con varias salas y estrenos",
+    "latitude": 4.6964,
+    "longitude": -74.1270,
+    "categoria": "Entretenimiento",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Engativá"
+  },
+  {
+    "title": "Teatro Fontibón",
+    "snippet": "Teatro para eventos y espectáculos",
+    "latitude": 4.6788,
+    "longitude": -74.1424,
+    "categoria": "Entretenimiento",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Fontibón"
+  },
+  {
+    "title": "Centro Cultural Kennedy",
+    "snippet": "Espacio para eventos culturales",
+    "latitude": 4.6308,
+    "longitude": -74.1469,
+    "categoria": "Entretenimiento",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Kennedy"
+  },
+  {
+    "title": "Museo Los Mártires",
+    "snippet": "Museo de historia",
+    "latitude": 4.6125,
+    "longitude": -74.0875,
+    "categoria": "Entretenimiento",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Los Mártires"
+  },
+  {
+    "title": "Restaurante Puente Aranda",
+    "snippet": "Restaurante de cocina colombiana",
+    "latitude": 4.6262,
+    "longitude": -74.1057,
+    "categoria": "Restaurantes",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Puente Aranda"
+  },
+  {
+    "title": "Café Rafael Uribe Uribe",
+    "snippet": "Café con especialidades locales",
+    "latitude": 4.5898,
+    "longitude": -74.1005,
+    "categoria": "Restaurantes",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Rafael Uribe Uribe"
+  },
+  {
+    "title": "Asadero San Cristóbal",
+    "snippet": "Asadero de carnes y parrilla",
+    "latitude": 4.5812,
+    "longitude": -74.0869,
+    "categoria": "Restaurantes",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "San Cristóbal"
+  },
+  {
+    "title": "Restaurante Santa Fe",
+    "snippet": "Comida internacional",
+    "latitude": 4.6097,
+    "longitude": -74.0741,
+    "categoria": "Restaurantes",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Santa Fe"
+  },
+  {
+    "title": "Bistró Suba",
+    "snippet": "Restaurante gourmet",
+    "latitude": 4.7503,
+    "longitude": -74.0975,
+    "categoria": "Restaurantes",
+    "telefono": "321 1234567",
+    "horario": "Lunes a Viernes, 8:00 AM - 6:00 PM",
+    "localidad": "Suba"
+  },
+  {
+    "title": "Cancha de Fútbol Antonio Nariño",
+    "snippet": "Cancha de fútbol al aire libre",
+    "latitude": 4.5937,
+    "longitude": -74.0919,
+    "categoria": "Deporte",
+    "telefono": "601-9876543",
+    "horario": "Lunes a Domingo, 6:00 AM - 10:00 PM",
+    "localidad": "Antonio Nariño"
+  },
+  {
+    "title": "Gimnasio Barrios Unidos",
+    "snippet": "Gimnasio con pesas y cardio",
+    "latitude": 4.6745,
+    "longitude": -74.0709,
+    "categoria": "Deporte",
+    "telefono": "+57 321 6549871",
+    "horario": "Lunes a Viernes, 6:00 AM - 9:00 PM; Sábado: 8:00 AM - 5:00 PM; Domingo: Cerrado",
+    "localidad": "Barrios Unidos"
+  },
+  {
+    "title": "Parque Deportivo Bosa",
+    "snippet": "Parque con canchas y zonas deportivas",
+    "latitude": 4.6289,
+    "longitude": -74.1845,
+    "categoria": "Deporte",
+    "telefono": "601-2345678",
+    "horario": "Lunes a Domingo, 7:00 AM - 8:00 PM",
+    "localidad": "Bosa"
+  },
+  {
+    "title": "Escuela de Natación Candelaria",
+    "snippet": "Piscina para clases de natación",
+    "latitude": 4.5993,
+    "longitude": -74.0760,
+    "categoria": "Deporte",
+    "telefono": "601-8765432",
+    "horario": "Lunes a Viernes, 7:00 AM - 5:00 PM",
+    "localidad": "Candelaria"
+  },
+  {
+    "title": "Centro Deportivo Chapinero",
+    "snippet": "Centro deportivo con múltiples actividades",
+    "latitude": 4.6483,
+    "longitude": -74.0588,
+    "categoria": "Deporte",
+    "telefono": "+57 312 3456789",
+    "horario": "Lunes a Domingo, 6:00 AM - 9:00 PM",
+    "localidad": "Chapinero"
+  },
+  {
+    "title": "Parque de Entretenimiento Ciudad Bolívar",
+    "snippet": "Parque de atracciones",
+    "latitude": 4.5762,
+    "longitude": -74.1643,
+    "categoria": "Entretenimiento",
+    "telefono": "601-1234567",
+    "horario": "Lunes a Domingo, 10:00 AM - 8:00 PM",
+    "localidad": "Ciudad Bolívar"
+  },
+  {
+    "title": "Cine Engativá",
+    "snippet": "Cine con varias salas y estrenos",
+    "latitude": 4.6964,
+    "longitude": -74.1270,
+    "categoria": "Entretenimiento",
+    "telefono": "+57 320 6541234",
+    "horario": "Lunes a Domingo, 12:00 PM - 11:00 PM",
+    "localidad": "Engativá"
+  },
+  {
+    "title": "Teatro Fontibón",
+    "snippet": "Teatro para eventos y espectáculos",
+    "latitude": 4.6788,
+    "longitude": -74.1424,
+    "categoria": "Entretenimiento",
+    "telefono": "601-7890123",
+    "horario": "Jueves a Domingo, 5:00 PM - 10:00 PM",
+    "localidad": "Fontibón"
+  },
+  {
+    "title": "Centro Cultural Kennedy",
+    "snippet": "Espacio para eventos culturales",
+    "latitude": 4.6308,
+    "longitude": -74.1469,
+    "categoria": "Entretenimiento",
+    "telefono": "+57 321 2345678",
+    "horario": "Lunes a Viernes, 9:00 AM - 6:00 PM",
+    "localidad": "Kennedy"
+  },
+  {
+    "title": "Museo Los Mártires",
+    "snippet": "Museo de historia",
+    "latitude": 4.6125,
+    "longitude": -74.0875,
+    "categoria": "Entretenimiento",
+    "telefono": "601-5678901",
+    "horario": "Martes a Domingo, 10:00 AM - 5:00 PM",
+    "localidad": "Los Mártires"
+  },
+  {
+    "title": "Restaurante Puente Aranda",
+    "snippet": "Restaurante de cocina colombiana",
+    "latitude": 4.6262,
+    "longitude": -74.1057,
+    "categoria": "Restaurantes",
+    "telefono": "+57 311 9876543",
+    "horario": "Lunes a Domingo, 11:00 AM - 9:00 PM",
+    "localidad": "Puente Aranda"
+  },
+  {
+    "title": "Café Rafael Uribe Uribe",
+    "snippet": "Café con especialidades locales",
+    "latitude": 4.5898,
+    "longitude": -74.1005,
+    "categoria": "Restaurantes",
+    "telefono": "601-4567890",
+    "horario": "Lunes a Sábado, 7:00 AM - 6:00 PM",
+    "localidad": "Rafael Uribe Uribe"
+  },
+  {
+    "title": "Asadero San Cristóbal",
+    "snippet": "Asadero de carnes y parrilla",
+    "latitude": 4.5812,
+    "longitude": -74.0869,
+    "categoria": "Restaurantes",
+    "telefono": "+57 310 1239876",
+    "horario": "Lunes a Domingo, 12:00 PM - 10:00 PM",
+    "localidad": "San Cristóbal"
+  },
+  {
+    "title": "Restaurante Santa Fe",
+    "snippet": "Comida internacional",
+    "latitude": 4.6097,
+    "longitude": -74.0741,
+    "categoria": "Restaurantes",
+    "telefono": "601-9870123",
+    "horario": "Lunes a Domingo, 11:00 AM - 10:00 PM",
+    "localidad": "Santa Fe"
+  },
+  {
+    "title": "Bistró Suba",
+    "snippet": "Restaurante gourmet",
+    "latitude": 4.736616359820516,
+    "longitude": -74.07460268263415,
+    "categoria": "Restaurantes",
+    "telefono": "+57 321 5674321",
+    "horario": "Martes a Domingo, 12:00 PM - 11:00 PM",
+    "localidad": "Suba"
+  },
+  {
+    "title": "Centro Deportivo Sumapaz",
+    "snippet": "Centro deportivo para deportes extremos",
+    "latitude": 4.2061,
+    "longitude": -74.1528,
+    "categoria": "Deporte",
+    "telefono": "601-3456789",
+    "horario": "Lunes a Domingo, 8:00 AM - 6:00 PM",
+    "localidad": "Sumapaz"
+  },
+  {
+    "title": "Gimnasio Teusaquillo",
+    "snippet": "Gimnasio con clases de zumba y pesas",
+    "latitude": 4.6535,
+    "longitude": -74.0941,
+    "categoria": "Deporte",
+    "telefono": "+57 314 8765432",
+    "horario": "Lunes a Sábado, 6:00 AM - 10:00 PM",
+    "localidad": "Teusaquillo"
+  },
+  {
+    "title": "Parque Deportivo Tunjuelito",
+    "snippet": "Parque con instalaciones deportivas",
+    "latitude": 4.5582,
+    "longitude": -74.1237,
+    "categoria": "Deporte",
+    "telefono": "601-2340987",
+    "horario": "Lunes a Domingo, 7:00 AM - 8:00 PM",
+    "localidad": "Tunjuelito"
+  },
+  {
+    "title": "Centro de Artes Usaquén",
+    "snippet": "Centro de actividades culturales y recreativas",
+    "latitude": 4.6988,
+    "longitude": -74.0301,
+    "categoria": "Entretenimiento",
+    "telefono": "+57 310 5678901",
+    "horario": "Lunes a Domingo, 9:00 AM - 8:00 PM",
+    "localidad": "Usaquén"
   }
 ]

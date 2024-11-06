@@ -47,13 +47,28 @@
                 android:id="@+id/mapOptionsMenu"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/menu_bar"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
+                android:contentDescription="@string/bot_n_para_opciones_de_mapa"
+                android:scaleType="fitXY"
+                android:src="@drawable/menu_bar_map"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/openFilter"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:background="@null"
                 android:scaleType="fitXY"
+                android:src="@drawable/menu_bar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.055"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintVertical_bias="0.93" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
