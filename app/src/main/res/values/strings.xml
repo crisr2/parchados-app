@@ -72,4 +72,13 @@
     <string name="category_filter">categoria</string>
 
     <string name="MAPS_KEY">AIzaSyANfNEPGlmNfy8b7Mef8vvsTAXQh2KrlUs</string>
+    <string name="categoria">Categoría</string>
+    <string name="localidad2">Localidad</string>
+    <string name="filtrar_por">Filtrar por:</string>
+    <string name="comida">Comida</string>
+    <string name="entretenimiento">Entretenimiento</string>
+    <string name="deportes">Deportes</string>
+    <string name="todos">Todos</string>
+    <string name="filtro_categor_as">Filtro - Categorías:</string>
+    <string name="filtro_localidades">Filtro - Localidades</string>
 </resources>

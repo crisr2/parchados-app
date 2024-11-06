@@ -6,9 +6,8 @@
     <!-- Borde alrededor del TextView -->
     <stroke
         android:width="2dp"
-        android:color="#9E9E9E" /> <!-- Cambia el color y grosor según lo necesites -->
+        android:color="#9E9E9E" />
 
-    <!-- Esquinas redondeadas (opcional) -->
-    <corners android:radius="8dp" /> <!-- Ajusta el radio para redondear las esquinas -->
+    <corners android:radius="8dp" />
 
 </shape>

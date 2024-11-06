@@ -8,12 +8,16 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.PopupMenu
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -135,109 +139,130 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             insets
         }
 
-        // Filtro de categorias
-        val categoryFilterButton: ImageButton = findViewById(R.id.categoryFilterButton)
-        val categoryMenu = PopupMenu(this, categoryFilterButton)
-        categoryMenu.menuInflater.inflate(R.menu.category_menu, categoryMenu.menu)
+        // Mostrar filtros
+        val openFilterButton = findViewById<ImageButton>(R.id.openFilter)
+        openFilterButton.setOnClickListener {
+            val filterView = layoutInflater.inflate(R.layout.filter_item, null)
+            val bottomSheetDialog = BottomSheetDialog(this)
+            bottomSheetDialog.window?.setDimAmount(0f)
+            bottomSheetDialog.setContentView(filterView)
 
-        categoryMenu.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.category_all -> {
-                    addMarkers(null)
-                }
-                R.id.category_sport -> {
-                    addMarkers("Deporte")
-                }
-                R.id.category_entertainment -> {
-                    addMarkers("Entretenimiento")
-                }
-                R.id.category_food -> {
-                    addMarkers("Comida")
-                }
+            // Acceder al filtro de categorias
+            val categoryFilterButton: Button = filterView.findViewById(R.id.categoryFilterButton)
+            categoryFilterButton.setOnClickListener {
+                showCategoryBottomSheet() // Función que crearemos para mostrar las categorías
             }
-            true
-        }
-        categoryFilterButton.setOnClickListener {
-            categoryMenu.show()
-        }
 
-        // Filtro de localidades
-        val locationFilterButton: ImageButton = findViewById(R.id.locationFilterButton)
-        val locationMenu = PopupMenu(this, locationFilterButton)
-        locationMenu.menuInflater.inflate(R.menu.localidades_menu, locationMenu.menu)
-
-        locationMenu.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.localidad_all -> {
-                    addMarkersByLocalidad(null) // Muestra todos sin filtrar por localidad
-                }
-                R.id.localidad_antonio_narino -> {
-                    addMarkersByLocalidad("Antonio Nariño")
-                }
-                R.id.localidad_barrios_unidos -> {
-                    addMarkersByLocalidad("Barrios Unidos")
-                }
-                R.id.localidad_bosa -> {
-                    addMarkersByLocalidad("Bosa")
-                }
-                R.id.localidad_candelaria -> {
-                    addMarkersByLocalidad("Candelaria")
-                }
-                R.id.localidad_chapinero -> {
-                    addMarkersByLocalidad("Chapinero")
-                }
-                R.id.localidad_ciudad_bolivar -> {
-                    addMarkersByLocalidad("Ciudad Bolívar")
-                }
-                R.id.localidad_engativa -> {
-                    addMarkersByLocalidad("Engativá")
-                }
-                R.id.localidad_fontibon -> {
-                    addMarkersByLocalidad("Fontibón")
-                }
-                R.id.localidad_kennedy -> {
-                    addMarkersByLocalidad("Kennedy")
-                }
-                R.id.localidad_los_martires -> {
-                    addMarkersByLocalidad("Los Mártires")
-                }
-                R.id.localidad_puente_aranda -> {
-                    addMarkersByLocalidad("Puente Aranda")
-                }
-                R.id.localidad_rafael_uribe -> {
-                    addMarkersByLocalidad("Rafael Uribe Uribe")
-                }
-                R.id.localidad_san_cristobal -> {
-                    addMarkersByLocalidad("San Cristóbal")
-                }
-                R.id.localidad_santa_fe -> {
-                    addMarkersByLocalidad("Santa Fe")
-                }
-                R.id.localidad_suba -> {
-                    addMarkersByLocalidad("Suba")
-                }
-                R.id.localidad_sumapaz -> {
-                    addMarkersByLocalidad("Sumapaz")
-                }
-                R.id.localidad_teusaquillo -> {
-                    addMarkersByLocalidad("Teusaquillo")
-                }
-                R.id.localidad_tunjuelito -> {
-                    addMarkersByLocalidad("Tunjuelito")
-                }
-                R.id.localidad_usaquen -> {
-                    addMarkersByLocalidad("Usaquén")
-                }
-                R.id.localidad_usme -> {
-                    addMarkersByLocalidad("Usme")
-                }
+            // Acceder al filtro de localidades
+            val locationFilterButton: Button = filterView.findViewById(R.id.locationFilterButton)
+            locationFilterButton.setOnClickListener {
+                showLocationBottomSheet(bottomSheetDialog) // Pasamos el diálogo de filtros
             }
-            true
+            // Mostrar el BottomSheet
+            bottomSheetDialog.show()
         }
-        locationFilterButton.setOnClickListener {
-            locationMenu.show()
-        }
+
     }
+
+    // Función para mostrar el Bottom Sheet de localidades, cerrando también el diálogo de filtros
+    private fun showLocationBottomSheet(filterBottomSheetDialog: BottomSheetDialog) {
+        val locationView = layoutInflater.inflate(R.layout.location_item, null)
+        val locationBottomSheetDialog = BottomSheetDialog(this)
+        locationBottomSheetDialog.window?.setDimAmount(0f)
+        locationBottomSheetDialog.setContentView(locationView)
+
+        // Obtener las localidades existentes de los marcadores y mostrarlas en el Bottom Sheet
+        val locationContainer = locationView.findViewById<LinearLayout>(R.id.locationContainer)
+        getLocationsFromFirebase { existingLocations ->
+            existingLocations.forEach { location ->
+                val button = Button(this).apply {
+                    text = location
+                    background = null  // Sin fondo
+                    setTextColor(ContextCompat.getColor(context, R.color.black)) // Color de texto
+                    elevation = 8f     // Elevación
+                    setPadding(0, 20, 0, 20) // Padding opcional para un diseño más limpio
+                    setOnClickListener {
+                        addMarkersByLocalidad(location)
+                        locationBottomSheetDialog.dismiss()
+                    }
+                }
+                locationContainer.addView(button)
+            }
+
+            // Agregar botón para mostrar todas las localidades
+            val allLocationsButton = Button(this).apply {
+                text = "Todas las localidades"
+                background = null
+                setTextColor(ContextCompat.getColor(context, R.color.black))
+                elevation = 8f
+                setPadding(0, 20, 0, 20)
+                setTypeface(null, Typeface.BOLD)
+                setOnClickListener {
+                    addMarkersByLocalidad(null)  // Mostrar todos los marcadores
+                    locationBottomSheetDialog.dismiss()
+                }
+            }
+            locationContainer.addView(allLocationsButton)
+        }
+
+        // Mostrar el Bottom Sheet de localidades
+        locationBottomSheetDialog.show()
+    }
+
+    // Función para obtener localidades únicas de Firebase
+    private fun getLocationsFromFirebase(onLocationsLoaded: (Set<String>) -> Unit) {
+        val databaseReference = FirebaseDatabase.getInstance().getReference("eventos")
+        val uniqueLocations = mutableSetOf<String>()
+
+        databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach { eventSnapshot ->
+                    val localidad = eventSnapshot.child("localidad").getValue(String::class.java)
+                    if (localidad != null) {
+                        uniqueLocations.add(localidad)
+                    }
+                }
+                onLocationsLoaded(uniqueLocations)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Manejar error en la lectura de Firebase si es necesario
+            }
+        })
+    }
+
+    // Función para mostrar el Bottom Sheet de categorías
+    private fun showCategoryBottomSheet() {
+        val categoryView = layoutInflater.inflate(R.layout.category_item, null)
+        val categoryBottomSheet = BottomSheetDialog(this)
+        categoryBottomSheet.window?.setDimAmount(0f)
+        categoryBottomSheet.setContentView(categoryView)
+
+        // Configurar listeners para cada botón en el Bottom Sheet de categorías
+        categoryView.findViewById<RadioButton>(R.id.category_all).setOnClickListener {
+            loadMarkersFromFirebase(null)
+            categoryBottomSheet.dismiss()
+        }
+
+        categoryView.findViewById<RadioButton>(R.id.category_sport).setOnClickListener {
+            loadMarkersFromFirebase("Deportes")
+            categoryBottomSheet.dismiss()
+        }
+
+        categoryView.findViewById<RadioButton>(R.id.category_entertainment).setOnClickListener {
+            loadMarkersFromFirebase("Entretenimiento")
+            categoryBottomSheet.dismiss()
+        }
+
+        categoryView.findViewById<RadioButton>(R.id.category_food).setOnClickListener {
+            loadMarkersFromFirebase("Comida")
+            categoryBottomSheet.dismiss()
+        }
+
+        // Mostrar el Bottom Sheet de categorías
+        categoryBottomSheet.show()
+    }
+
 
     private fun ZoomOnMap(latitudes: LatLng) {
         mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latitudes, 16f))
@@ -266,13 +291,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
     override fun onMapReady(googleMap: GoogleMap) {
         mGoogleMap = googleMap
         val initialLatLng = LatLng(4.60971, -74.08175)
-        //googleMap?
-        mGoogleMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLatLng, 13f))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLatLng, 13f))
 
-        mGoogleMap!!.uiSettings.isMyLocationButtonEnabled = true
-        mGoogleMap!!.uiSettings.isZoomControlsEnabled = true
-        mGoogleMap!!.uiSettings.isZoomGesturesEnabled = true
-        mGoogleMap!!.uiSettings.isScrollGesturesEnabled = true
+        googleMap.uiSettings.isMyLocationButtonEnabled = true
+        googleMap.uiSettings.isZoomControlsEnabled = true
+        googleMap.uiSettings.isZoomGesturesEnabled = true
+        googleMap.uiSettings.isScrollGesturesEnabled = true
 
         loadMarkersFromFirebase(null)
 
@@ -467,7 +491,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                     evento?.let {
                         try {
                             // Parseo de la ubicación
-                            val (lat, lng) = it.ubicacion?.split(",")!!.map { coord -> coord.toDouble() }
+                            val (lat, lng) = it.ubicacion?.split(",")!!
+                                .map { coord -> coord.toDouble() }
                             val position = LatLng(lat, lng)
 
                             // Almacena la coordenada en formato "lat,lng" en la lista de coordenadas existentes
@@ -475,10 +500,21 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
 
                             // Asigna el color según la categoría
                             val color = when (it.categoria) {
-                                "Deportes" -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
-                                "Comida" -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)
-                                "Entretenimiento" -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
-                                else -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE) // Color por defecto
+                                "Deportes" -> BitmapDescriptorFactory.defaultMarker(
+                                    BitmapDescriptorFactory.HUE_BLUE
+                                )
+
+                                "Comida" -> BitmapDescriptorFactory.defaultMarker(
+                                    BitmapDescriptorFactory.HUE_GREEN
+                                )
+
+                                "Entretenimiento" -> BitmapDescriptorFactory.defaultMarker(
+                                    BitmapDescriptorFactory.HUE_RED
+                                )
+
+                                else -> BitmapDescriptorFactory.defaultMarker(
+                                    BitmapDescriptorFactory.HUE_ORANGE
+                                ) // Color por defecto
                             }
 
                             if (localidad == null || it.localidad == localidad) {
@@ -490,10 +526,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                                         .icon(color)
                                 )
                                 marker?.tag = eventSnapshot.key
+                            } else {
+                                // ??
                             }
                         } catch (e: Exception) {
-                            e.printStackTrace()
-                            Toast.makeText(this, "Error al cargar marcadores desde JSON", Toast.LENGTH_SHORT).show()
+                            Log.e("MainActivity", "Error parsing location for ${it.titulo}: ${e.message}")
                         }
                     }
                 }

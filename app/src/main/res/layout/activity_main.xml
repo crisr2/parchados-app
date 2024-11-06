@@ -48,37 +48,27 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="60dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
                 android:contentDescription="@string/bot_n_para_opciones_de_mapa"
-                android:src="@drawable/menu_bar"
-                android:background="@null"
                 android:scaleType="fitXY"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:src="@drawable/menu_bar_map"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/categoryFilterButton"
+                android:id="@+id/openFilter"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="120dp"
-                android:layout_marginEnd="12dp"
-                android:src="@drawable/menu_bar"
                 android:background="@null"
                 android:scaleType="fitXY"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <ImageButton
-                android:id="@+id/locationFilterButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginEnd="345dp"
                 android:src="@drawable/menu_bar"
-                android:background="@null"
-                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.055"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintVertical_bias="0.93" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
