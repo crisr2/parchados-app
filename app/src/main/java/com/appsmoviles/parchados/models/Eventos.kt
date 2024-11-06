@@ -2,6 +2,7 @@ package com.appsmoviles.parchados.models
 
 data class Eventos(
     val eventId: String? = null,
+    val userId: String? = null,
     val titulo: String? = null,
     val descripcion: String? = null,
     val direccion: String? = null,

@@ -7,7 +7,7 @@
     <string name="logo">logo</string>
 
     <string name="perfil">Perfil</string>
-    <string name="favoritos">Favoritos</string>
+    <string name="favoritos">Mis Favoritos</string>
     <string name="cuenta">Cuenta</string>
     <string name="cerrar_sesi_n">Cerrar sesión</string>
     <string name="enviar">Enviar</string>
@@ -49,10 +49,10 @@
     <string name="cerrar">Cerrar</string>
     <string name="button_Text">Iniciar Sesion</string>
     <string name="user">Usuario</string>
-    <string name="no_login">¿No tienes cuenta? Registrate</string>
+    <string name="no_login">¿No tienes cuenta?\nRegistrate</string>
     <string name="if_reg">¿Ya tienes cuenta? Inicia sesion</string>
-    <string name="first_text">Inicio de</string>
-    <string name="second_text">Sesion</string>
+    <string name="first_text">INICIA</string>
+    <string name="second_text">SESIÓN</string>
     <string name="description">Imagen</string>
     <string name="hint_pass">Contraseña</string>
     <string name="hint_email">Correo</string>
@@ -116,5 +116,6 @@
     <string name="mis_eventos">Mis eventos</string>
 
     <string name="MAPS_KEY">AIzaSyANfNEPGlmNfy8b7Mef8vvsTAXQh2KrlUs</string>
+    <string name="registrate">Registrate</string>
 
 </resources>

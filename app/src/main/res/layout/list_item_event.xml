@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp"
+    android:background="?attr/selectableItemBackground"
+    app:cardCornerRadius="40dp"
+    app:cardElevation="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="#144253">
+
+        <!-- Icono de edición (alineado arriba a la derecha) -->
+        <ImageView
+            android:id="@+id/iconEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_edit"
+            android:contentDescription="Edit Event"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="8dp"
+            android:layout_alignTop="@id/textViewEventTitle"
+            android:padding="8dp" />
+
+        <!-- Icono de borrar (debajo del icono de edición) -->
+        <ImageView
+            android:id="@+id/iconDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_delete"
+            android:contentDescription="Delete Event"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/iconEdit"
+            android:layout_marginEnd="8dp"
+            android:padding="8dp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Título del evento -->
+        <TextView
+            android:id="@+id/textViewEventTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/iconEdit"
+            android:layout_alignParentStart="true"
+            android:text="Event Title"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/white" />
+
+        <!-- Descripción del evento -->
+        <TextView
+            android:id="@+id/textViewEventDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewEventTitle"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/iconEdit"
+            android:text="Event Description"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="4dp" />
+
+        <!-- Ubicación del evento -->
+        <TextView
+            android:id="@+id/textViewEventLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewEventDescription"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/iconDelete"
+            android:text="Event Location"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="4dp" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

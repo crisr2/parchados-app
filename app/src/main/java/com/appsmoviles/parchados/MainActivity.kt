@@ -46,9 +46,8 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
-import org.json.JSONArray
-import java.io.InputStream
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
@@ -375,14 +374,31 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
 
                 // Configurar los íconos de redes sociales
                 val instagramIcon = dialogView.findViewById<ImageView>(R.id.instagramIcon)
-                instagramIcon.setOnClickListener { abrirEnlace("https://instagram.com/${instagram}") }
+                instagramIcon.setOnClickListener {
+                    if (instagram.isNotEmpty()) {
+                        abrirEnlace("https://instagram.com/$instagram")
+                    } else {
+                        Toast.makeText(this, "El enlace de Instagram está vacío", Toast.LENGTH_SHORT).show()
+                    }
+                }
 
                 val tiktokIcon = dialogView.findViewById<ImageView>(R.id.tiktokIcon)
-                tiktokIcon.setOnClickListener { abrirEnlace("https://tiktok.com/@${tiktok}") }
+                tiktokIcon.setOnClickListener {
+                    if (tiktok.isNotEmpty()) {
+                        abrirEnlace("https://tiktok.com/@$tiktok")
+                    } else {
+                        Toast.makeText(this, "El enlace de TikTok está vacío", Toast.LENGTH_SHORT).show()
+                    }
+                }
 
                 val websiteIcon = dialogView.findViewById<ImageView>(R.id.websiteIcon)
-                websiteIcon.setOnClickListener { abrirEnlace(url) }
-
+                websiteIcon.setOnClickListener {
+                    if (url.isNotEmpty()) {
+                        abrirEnlace(url)
+                    } else {
+                        Toast.makeText(this, "El enlace del sitio web está vacío", Toast.LENGTH_SHORT).show()
+                    }
+                }
                 // Configurar el icono de categoría
                 val categoriaIcono = dialogView.findViewById<ImageView>(R.id.categoryIcon) // Asegúrate de tener un ImageView para el icono de categoría en tu layout
 
@@ -559,17 +575,20 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
     override fun onNavigationItemSelected(item: android.view.MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_item_one -> {
-                // Acción para el primer elemento
-            }
-            R.id.nav_item_two -> {
                 val intent = Intent(this, FormsActivity::class.java)
                 startActivity(intent)
             }
-            R.id.nav_item_three -> {
-                // Acción para el primer elemento
+            R.id.nav_item_two -> {
+                val intent = Intent(this, MyEventsActivity::class.java)
+                startActivity(intent)
             }
-            R.id.nav_item_four -> {
-                // Acción para el segundo elemento
+            R.id.nav_item_three -> {
+                // Cerrar sesión
+                FirebaseAuth.getInstance().signOut()
+                Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
         drawer.closeDrawer(GravityCompat.START)

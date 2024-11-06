@@ -18,7 +18,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:contentDescription="@string/logo"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/ic_perfil" />
 
     <TextView
         android:id="@+id/nav_header_textView"

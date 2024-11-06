@@ -21,6 +21,16 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.login)
         auth = FirebaseAuth.getInstance()
 
+        // Verificar si el usuario ya ha iniciado sesión
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            // Si el usuario ya está autenticado, redirigir a MainActivity
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
+
         val emailEditText = findViewById<EditText>(R.id.emailInput)
         val passwordEditText = findViewById<EditText>(R.id.passwordInput)
         val loginButton = findViewById<Button>(R.id.loginBtn)

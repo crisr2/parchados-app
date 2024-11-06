@@ -22,6 +22,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.appsmoviles.parchados.models.Eventos
 import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -51,6 +52,8 @@ class FormsActivity : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private lateinit var imagePickerLauncher: ActivityResultLauncher<String>
     private lateinit var removeImageButton: ImageView
+
+    private var currentEventId: String? = null
 
     private val database: DatabaseReference = FirebaseDatabase.getInstance().getReference("eventos")
 
@@ -94,6 +97,12 @@ class FormsActivity : AppCompatActivity() {
         tkText = tkLayout.editText as TextInputEditText
         linkText = linkLayout.editText as TextInputEditText
 
+        // Comprobar si estamos en modo de edición
+        currentEventId = intent.getStringExtra("eventId")
+
+        if (currentEventId != null) {
+            loadEventData(currentEventId!!)  // Cargar datos si estamos editando
+        }
 
         // Imagen
         imageView = findViewById(R.id.selected_image) // Asegúrate de que tengas un ImageView con este ID
@@ -151,12 +160,14 @@ class FormsActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s != null) {
+                if (!s.isNullOrEmpty()) {
                     if (s.matches(Regex("^[-+]?\\d*\\.?\\d+,[-+]?\\d*\\.?\\d+$"))) {
                         locationLayout.error = null
                     } else {
                         locationLayout.error = "Formato inválido. Usa el formato: latitud,longitud"
                     }
+                } else {
+                    locationLayout.error = null // No muestra error si está vacío
                 }
             }
 
@@ -217,9 +228,9 @@ class FormsActivity : AppCompatActivity() {
         findViewById<Button>(R.id.submitButton).setOnClickListener {
             val isValid = validateFields(titleLayout, descriptionLayout, locationtLayout, locationLayout, localityLayout, phoneLayout, categoryLayout, priceLayout, exitHoursLayout, entryHoursLayout)
             val allLinksValid = validateLinks()
+            val user = FirebaseAuth.getInstance().currentUser
 
             if (isValid && allLinksValid) {
-
                 // Recoger datos del formulario
                 val title = titleText.text.toString()
                 val description = descriptionText.text.toString()
@@ -234,19 +245,49 @@ class FormsActivity : AppCompatActivity() {
                 val instagram = igText.text.toString()
                 val tiktok = tkText.text.toString()
                 val link = linkText.text.toString()
+                val userId = user!!.uid
 
-                val eventId = database.push().key!!
-                val eventos = Eventos(eventId, title, description, locationt, location, locality, phone, category, price, entryTime, exitTime, instagram, tiktok, link)
+                if (currentEventId == null) {
+                    // Crear nuevo evento si no existe `eventId`
+                    val eventId = database.push().key!!
+                    val eventos = Eventos(eventId, userId, title, description, locationt, location, locality, phone, category, price, entryTime, exitTime, instagram, tiktok, link)
 
-                // Crear un nuevo evento
-                database.child(eventId).setValue(eventos)
-                    .addOnCompleteListener{
-                        Toast.makeText(this, "Formulario enviado correctamente", Toast.LENGTH_SHORT).show()
-                        clearForm()
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(this, "error ${it.message}", Toast.LENGTH_SHORT).show()
-                    }
+                    database.child(eventId).setValue(eventos)
+                        .addOnCompleteListener {
+                            Toast.makeText(this, "Formulario enviado correctamente", Toast.LENGTH_SHORT).show()
+                            clearForm()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    // Actualizar evento existente
+                    val updatedEvent = mapOf(
+                        "titulo" to titleText.text.toString(),
+                        "descripcion" to descriptionText.text.toString(),
+                        "direccion" to locationtText.text.toString(),
+                        "ubicacion" to locationText.text.toString(),
+                        "localidad" to localityText.text.toString(),
+                        "telefono" to phoneText.text.toString(),
+                        "categoria" to categoryText.text.toString(),
+                        "precio" to priceText.text.toString(),
+                        "horainicio" to entryTimeText.text.toString(),
+                        "horafinal" to exitTimeText.text.toString(),
+                        "instagram" to igText.text.toString(),
+                        "tiktok" to tkText.text.toString(),
+                        "url" to linkText.text.toString()
+                    )
+
+
+                    database.child(currentEventId!!).updateChildren(updatedEvent)
+                        .addOnCompleteListener {
+                            Toast.makeText(this, "Evento actualizado correctamente", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
 
             }
         }
@@ -258,6 +299,31 @@ class FormsActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun loadEventData(eventId: String) {
+        // Cargar datos del evento de la base de datos y rellenar el formulario
+        database.child(eventId).get().addOnSuccessListener { snapshot ->
+            val event = snapshot.getValue(Eventos::class.java)
+            if (event != null) {
+                titleText.setText(event.titulo)
+                descriptionText.setText(event.descripcion)
+                locationtText.setText(event.direccion)
+                locationText.setText(event.ubicacion)
+                localityText.setText(event.localidad)
+                phoneText.setText(event.telefono)
+                categoryText.setText(event.categoria)
+                priceText.setText(event.precio)
+                entryTimeText.setText(event.horainicio)
+                exitTimeText.setText(event.horafinal)
+                igText.setText(event.instagram)
+                tkText.setText(event.tiktok)
+                linkText.setText(event.url)
+            }
+        }.addOnFailureListener {
+            Toast.makeText(this, "Error al cargar los datos: ${it.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()

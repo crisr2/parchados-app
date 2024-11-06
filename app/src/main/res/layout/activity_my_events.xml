@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/background_gradient">
+
+    <!-- Título de sección -->
+    <TextView
+        android:id="@+id/textViewSectionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mis eventos"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/degrade_2"
+        android:layout_gravity="center"/>
+
+    <!-- ScrollView para permitir el desplazamiento -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <!-- RecyclerView para los eventos -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewEvents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
+    </ScrollView>
+
+    <!-- ImageButton para regresar al menú principal -->
+    <ImageButton
+        android:id="@+id/imageButtonBack"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/ic_back"
+        android:contentDescription="Regresar al menú"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+
+</LinearLayout>
