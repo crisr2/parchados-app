@@ -33,4 +33,18 @@
     <string name="restablecer_title">Restablecer Contraseña</string>
     <string name="correo_restablecer">Escribe un correo</string>
     <string name="btn_restablecer">Restablecer</string>
+
+
+    <string name="firstname">Escribe tu nombre</string>
+    <string name="first_lastname">Escribe tu primer apellido</string>
+    <string name="btn_next">Continuar</string>
+    <string name="text_user">Primero Cuentanos de tí</string>
+    <string name="text_user_2">Empecemos por tu nombre</string>
+    <string name="text_user3">Para finalizar</string>
+    <string name="text_user4">Contesta las siguentes preguntas</string>
+    <string name="phone">Numero de celular</string>
+    <string name="birthday">¿Cuando naciste?</string>
+    <string name="gener">Seleciona tu genero</string>
+
+    <string name="textEdit">Modo edicion</string>
 </resources>

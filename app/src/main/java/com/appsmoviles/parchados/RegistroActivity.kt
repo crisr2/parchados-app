@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
-class RegisterActivity : AppCompatActivity() {
+class RegistroActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
@@ -33,7 +33,7 @@ class RegisterActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, MainActivity::class.java)
+                            val intent = Intent(this, UserActivity::class.java)
                             startActivity(intent)
                             finish()
                         } else {

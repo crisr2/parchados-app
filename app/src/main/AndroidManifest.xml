@@ -13,22 +13,47 @@
         android:theme="@style/Theme.Parchados"
         tools:targetApi="31">
         <activity
-            android:name=".RestablecerActivity"
-            android:exported="true" />
+            android:name=".EditActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".LoginActivity"
-            android:exported="true">
+            android:name=".ProfileActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserActivity2"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+            android:name=".RestablecerActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".RegisterActivity"
-            android:exported="true" />
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegistroActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

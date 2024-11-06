@@ -1,19 +1,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     android:background="@drawable/background_gradient"
     android:padding="16dp">
 
     <!-- Botón de editar -->
     <ImageButton
         android:id="@+id/btn_edit_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
         android:background="@null"
-        android:src="@drawable/ic_edit"
-        android:contentDescription="@string/editar_perfil" />
+        android:contentDescription="@string/editar_perfil"
+        android:src="@drawable/ic_edit" />
 
     <!-- Título del perfil -->
     <TextView
@@ -58,26 +59,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_name_value"
+            android:id="@+id/nameProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pepito_perez"
-            android:textColor="#FFFFFF" />
-
-        <!-- Usuario -->
-        <TextView
-            android:id="@+id/tv_username_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/usuario"
-            android:textColor="#00B0FF"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_username_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/elpepitop"
+            android:text=""
             android:textColor="#FFFFFF" />
 
         <!-- Correo -->
@@ -90,10 +75,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_email_value"
+            android:id="@+id/emailProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pepito_gmail_com"
+            android:text=""
             android:textColor="#FFFFFF" />
 
         <!-- Teléfono -->
@@ -106,10 +91,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_phone_value"
+            android:id="@+id/phoneProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tel_345_7891239"
+            android:text=""
             android:textColor="#FFFFFF" />
 
         <!-- Edad -->
@@ -122,10 +107,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_age_value"
+            android:id="@+id/ageProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/edad_21"
+            android:text=""
             android:textColor="#FFFFFF" />
 
         <!-- Género -->
@@ -138,10 +123,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_gender_value"
+            android:id="@+id/genderProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gender_h"
+            android:text=""
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
@@ -154,6 +139,6 @@
         android:layout_alignParentBottom="true"
         android:background="@null"
         android:src="@drawable/ic_close"
-        android:contentDescription="@string/cerrar" />
+        android:contentDescription="@string/cerrar"/>
 
 </RelativeLayout>
