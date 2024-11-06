@@ -12,9 +12,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/degrade_2"
+        android:background="@color/black"
         app:title="@string/registra_tu_evento"
-        app:titleTextColor="@color/degrade_1"
+        app:titleTextColor="@color/white"
         tools:ignore="MissingConstraints" />
 
     <!-- Contenido del formulario aquí -->
@@ -43,7 +43,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:endIconMode="clear_text"
                 app:boxStrokeColor="@color/degrade_2"
-                app:hintTextColor="@color/degrade_2">
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/title_text"
@@ -68,7 +72,11 @@
                 app:counterMaxLength="250"
                 app:counterTextColor="@color/degrade_2"
                 app:boxStrokeColor="@color/degrade_2"
-                app:hintTextColor="@color/degrade_2">
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/description_text"
@@ -95,7 +103,11 @@
                 android:layout_marginTop="16dp"
                 app:endIconMode="clear_text"
                 app:boxStrokeColor="@color/degrade_2"
-                app:hintTextColor="@color/degrade_2">
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/locationT_text"
@@ -117,7 +129,11 @@
                 app:helperText="Ingresa las coordenadas en formato latitud,longitud."
                 app:endIconMode="clear_text"
                 app:boxStrokeColor="@color/degrade_2"
-                app:hintTextColor="@color/degrade_2">
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/location_text"
@@ -138,7 +154,11 @@
                 android:hint="@string/localidad"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 app:boxStrokeColor="@color/degrade_2"
-                app:hintTextColor="@color/degrade_2">
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <AutoCompleteTextView
                     android:id="@+id/locality_view"
@@ -165,7 +185,11 @@
                 app:hintTextColor="@color/degrade_2"
                 app:counterEnabled="true"
                 app:counterMaxLength="10"
-                app:counterTextColor="@color/degrade_2">
+                app:counterTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phone_text"
@@ -196,7 +220,11 @@
                     android:hint="@string/categor_a"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     app:boxStrokeColor="@color/degrade_2"
-                    app:hintTextColor="@color/degrade_2">
+                    app:hintTextColor="@color/degrade_2"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/category_view"
@@ -221,7 +249,11 @@
                     app:prefixTextColor="@color/degrade_2"
                     app:endIconMode="clear_text"
                     app:boxStrokeColor="@color/degrade_2"
-                    app:hintTextColor="@color/degrade_2">
+                    app:hintTextColor="@color/degrade_2"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/price_text"
@@ -259,7 +291,11 @@
                     android:layout_marginStart="10dp"
                     android:hint="@string/entrada"
                     app:boxStrokeColor="@color/degrade_2"
-                    app:hintTextColor="@color/degrade_2">
+                    app:hintTextColor="@color/degrade_2"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/entry_time_text"
@@ -278,7 +314,11 @@
                     android:layout_marginStart="8dp"
                     android:hint="@string/salida"
                     app:boxStrokeColor="@color/degrade_2"
-                    app:hintTextColor="@color/degrade_2">
+                    app:hintTextColor="@color/degrade_2"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/exit_time_text"
@@ -315,6 +355,7 @@
                     android:id="@+id/event_image_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
                     android:text="@string/seleccionar_imagen"/>
 
             </LinearLayout>
@@ -356,7 +397,11 @@
                 app:prefixTextColor="@color/degrade_2"
                 app:endIconMode="clear_text"
                 app:boxStrokeColor="@color/degrade_2"
-                app:hintTextColor="@color/degrade_2">
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ig_link"
@@ -378,7 +423,11 @@
                 app:prefixTextColor="@color/degrade_2"
                 app:endIconMode="clear_text"
                 app:boxStrokeColor="@color/degrade_2"
-                app:hintTextColor="@color/degrade_2">
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tk_link"
@@ -399,7 +448,11 @@
                 app:prefixTextColor="@color/degrade_2"
                 app:endIconMode="clear_text"
                 app:boxStrokeColor="@color/degrade_2"
-                app:hintTextColor="@color/degrade_2">
+                app:hintTextColor="@color/degrade_2"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/link"
@@ -410,13 +463,15 @@
 
             <Button
                 android:id="@+id/submitButton"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="@string/enviar"
                 app:layout_constraintTop_toBottomOf="@id/event_ig"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp" />
+                android:backgroundTint="@color/degrade_2"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

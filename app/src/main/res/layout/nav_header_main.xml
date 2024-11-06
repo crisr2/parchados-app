@@ -3,7 +3,7 @@
     android:id="@+id/nav_header"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="@drawable/nav_header_gradient"
+    android:background="@color/degrade_1"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
@@ -15,10 +15,10 @@
     <!-- Creado para menú principal -->
     <ImageView
         android:id="@+id/nav_header_imageView"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:contentDescription="@string/logo"
-        android:src="@drawable/menu_bar" />
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/nav_header_textView"
@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:text="@string/parchados"
-        android:textColor="@color/degrade_1"/>
+        android:textSize="20sp"
+        android:textColor="@color/white"/>
 
 </LinearLayout>

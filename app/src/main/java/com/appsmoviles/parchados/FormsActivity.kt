@@ -19,6 +19,7 @@ import android.widget.ImageView
 import java.util.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import com.appsmoviles.parchados.models.Eventos
 import com.google.firebase.FirebaseApp
 import java.text.SimpleDateFormat
@@ -382,6 +383,7 @@ class FormsActivity : AppCompatActivity() {
     private fun clearForm() {
         titleText.text?.clear()
         descriptionText.text?.clear()
+        locationtText.text?.clear()
         locationText.text?.clear()
         localityText.text?.clear()
         phoneText.text?.clear()

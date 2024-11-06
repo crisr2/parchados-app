@@ -92,6 +92,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                 if (latLng != null) {
                     addMarkerOnMap(latLng)
                 }
+
             }
 
             override fun onError(status: Status) {
@@ -268,6 +269,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latitudes, 16f))
     }
 
+    private fun ZoomOnIt(latitudes: LatLng) {
+        mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latitudes, 12f))
+    }
+
+
     private fun addMarkerOnMap(position: LatLng) {
         val titleWithCoordinates = "${position.latitude}, ${position.longitude}"
         currentMarker?.remove()
@@ -307,6 +313,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
         }
 
         mGoogleMap?.setOnMarkerClickListener { marker ->
+            val currentLocation = LatLng(mGoogleMap?.myLocation?.latitude ?: 0.0, mGoogleMap?.myLocation?.longitude ?: 0.0)
+            val origin = "${currentLocation.latitude},${currentLocation.longitude}"
             val coordinates = "${marker.position.latitude},${marker.position.longitude}"
 
             if (!existingCoordinates.contains(coordinates)) {
@@ -316,9 +324,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                 clipboard.setPrimaryClip(clip)
             }
 
+            // Llamar a la función ZoomOnIt para hacer zoom en el marcador
+            ZoomOnIt(marker.position)
+
+
+
             eventoId = marker.tag as? String  // Asegúrate de asignar el tag cuando crees el marcador
             eventoId?.let {
-                mostrarDialogoEvento(it)
+                mostrarDialogoEvento(it, origin, coordinates)
             }
 
             false
@@ -328,7 +341,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
 
     // Se abre el evento
     @SuppressLint("InflateParams", "SetTextI18n")
-    private fun mostrarDialogoEvento(eventoId: String) {
+    private fun mostrarDialogoEvento(eventoId: String, origen: String, destino: String) {
 
         val eventoRef = database.child(eventoId)
 
@@ -372,6 +385,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
 
                 // Configurar el icono de categoría
                 val categoriaIcono = dialogView.findViewById<ImageView>(R.id.categoryIcon) // Asegúrate de tener un ImageView para el icono de categoría en tu layout
+
+                // Configurar botón de 'ir al evento'
+                val rutaBoton = dialogView.findViewById<Button>(R.id.eventButton)
+                rutaBoton.setOnClickListener { abrirEnlace("https://www.google.com/maps/dir/?api=1&origin=$origen&destination=$destino")}
 
                 // Asignar el icono según la categoría
                 val icono = when (categoria) {
@@ -446,6 +463,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                                         .icon(color)
                                 )
                                 marker?.tag = eventSnapshot.key
+
                             }
                             else if (cat == null){
                                 // Crea el marcador
@@ -464,12 +482,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                             Log.e("MainActivity", "Error parsing location for ${it.titulo}: ${e.message}")
                         }
                     }
-                }
-
-                // Centra el mapa en la última ubicación agregada (opcional)
-                snapshot.children.lastOrNull()?.getValue(Eventos::class.java)?.let { lastEvent ->
-                    val (lat, lng) = lastEvent.ubicacion?.split(",")!!.map { coord -> coord.toDouble() }
-                    mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 10f))
                 }
             }
 
@@ -533,11 +545,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                             Log.e("MainActivity", "Error parsing location for ${it.titulo}: ${e.message}")
                         }
                     }
-                }
-                // Centra el mapa en la última ubicación agregada (opcional)
-                snapshot.children.lastOrNull()?.getValue(Eventos::class.java)?.let { lastEvent ->
-                    val (lat, lng) = lastEvent.ubicacion?.split(",")!!.map { coord -> coord.toDouble() }
-                    mGoogleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 10f))
                 }
             }
 

@@ -52,13 +52,13 @@
         <item>Usme</item>
     </string-array>
 
-    <string name="entrada">Entrada</string>
-    <string name="salida">Salida</string>
+    <string name="entrada">Inicio</string>
+    <string name="salida">Final</string>
     <string name="imagen_seleccionada">Imagen seleccionada</string>
     <string name="seleccionar_imagen">Seleccionar imagen</string>
     <string name="instagram">Instagram</string>
     <string name="tiktok">TikTok</string>
-    <string name="otro_link">Otro Link</string>
+    <string name="otro_link">Otra URL</string>
     <string name="eliminar_imagen">Eliminar imagen</string>
     <string name="localidad">*Localidad</string>
     <string name="portada">Portada</string>
@@ -81,4 +81,5 @@
     <string name="todos">Todos</string>
     <string name="filtro_categor_as">Filtro - Categorías:</string>
     <string name="filtro_localidades">Filtro - Localidades</string>
+    <string name="mis_eventos">Mis eventos</string>
 </resources>
